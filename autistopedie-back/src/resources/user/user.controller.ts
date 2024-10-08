@@ -1,8 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
+import { Public } from 'src/decorators/public.decorator';
+import { Roles } from 'src/decorators/role.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { RemoveUserDto } from './dto/remove-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Role } from './enums/role.enum';
 import { User } from './schemas/user.schema';
 import { UserService } from './user.service';
 
@@ -10,16 +13,19 @@ import { UserService } from './user.service';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
+    @Public()
     @Post()
     create(@Body() createUserDto: CreateUserDto): Promise<User> {
         return this.userService.create(createUserDto);
     }
 
+    @Roles(Role.ADMIN, Role.CONTRIBUTOR)
     @Get()
     findAll() {
         return this.userService.findAll();
     }
 
+    @Public()
     @Get(':id')
     findOne(@Param('id') id: ObjectId | string) {
         return this.userService.findOne(new ObjectId(id));

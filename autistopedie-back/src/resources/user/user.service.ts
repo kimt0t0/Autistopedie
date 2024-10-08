@@ -1,4 +1,10 @@
-import { Inject, Injectable, NotAcceptableException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+    Inject,
+    Injectable,
+    NotAcceptableException,
+    NotFoundException,
+    UnauthorizedException,
+} from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
@@ -84,10 +90,21 @@ export class UserService {
             // destructure dto
             const { username, email, newEmail, password, newPassword, role } = updateUserDto;
             // check authenticated user
-            const token = this.request.rawHeaders.find(header => header.startsWith('Bearer ')).replace('Bearer ', '').replace(' ', '');
+            const token = this.request.rawHeaders
+                .find((header) => header.startsWith('Bearer '))
+                .replace('Bearer ', '')
+                .replace(' ', '');
             const decodedToken: IDecodedToken = decodeToken(token);
-            const authenticatedUser: User = await this.userModel.findById(new ObjectId(decodedToken._id)).exec();
-            if (authenticatedUser.role != Role.ADMIN && authenticatedUser._id.toString() != id.toString()) throw new UnauthorizedException(`A user account can be edited only by its owner or an admin account.`);
+            const authenticatedUser: User = await this.userModel
+                .findById(new ObjectId(decodedToken._id))
+                .exec();
+            if (
+                authenticatedUser.role != Role.ADMIN &&
+                authenticatedUser._id.toString() != id.toString()
+            )
+                throw new UnauthorizedException(
+                    `A user account can be edited only by its owner or an admin account.`,
+                );
             const isPasswordMatch = bcrypt.compare(authenticatedUser.hash, password);
             if (!isPasswordMatch) throw new NotAcceptableException(`User password is incorrect.`);
             if (email != authenticatedUser.email)
@@ -124,11 +141,20 @@ export class UserService {
         try {
             const { email, password } = removeUserDto;
             // check authenticated user
-            const token = this.request.rawHeaders.find(header => header.startsWith('Bearer ')).replace('Bearer ', '').replace(' ', '');
+            const token = this.request.rawHeaders
+                .find((header) => header.startsWith('Bearer '))
+                .replace('Bearer ', '')
+                .replace(' ', '');
             const decodedToken: IDecodedToken = decodeToken(token);
             const authenticatedUser = await this.userModel
-            .findById(decodedToken._id).select('email').select('password').exec();
-            if (authenticatedUser.role != Role.ADMIN && authenticatedUser._id != id) throw new UnauthorizedException(`A user account can be edited only by its owner or an admin account.`);
+                .findById(decodedToken._id)
+                .select('email')
+                .select('password')
+                .exec();
+            if (authenticatedUser.role != Role.ADMIN && authenticatedUser._id != id)
+                throw new UnauthorizedException(
+                    `A user account can be edited only by its owner or an admin account.`,
+                );
             const isPasswordMatch = bcrypt.compare(authenticatedUser.hash, password);
             if (!isPasswordMatch) throw new NotAcceptableException(`User password is incorrect.`);
             if (email != authenticatedUser.email)

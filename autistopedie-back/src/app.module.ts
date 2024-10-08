@@ -12,6 +12,7 @@ import { RolesGuard } from './guards/role.guard';
 import { AuthModule } from './resources/auth/auth.module';
 import { DataModule } from './resources/data/data.module';
 import { IllustrationModule } from './resources/illustration/illustration.module';
+import { User, UserSchema } from './resources/user/schemas/user.schema';
 import { UserModule } from './resources/user/user.module';
 
 @Module({
@@ -34,6 +35,8 @@ import { UserModule } from './resources/user/user.module';
                 limit: 15, // number of requests allowed per user on all guarded routes
             },
         ]),
+        // import api resources
+        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
         AuthModule,
         UserModule,
         DataModule,
@@ -42,14 +45,16 @@ import { UserModule } from './resources/user/user.module';
     controllers: [AppController],
     providers: [
         AppService,
+        // global guard
         {
             provide: APP_GUARD,
             useClass: AuthGuard,
         },
+        // roles guard
         {
             provide: APP_GUARD,
             useClass: RolesGuard,
-        }
+        },
     ],
 })
 export class AppModule {}

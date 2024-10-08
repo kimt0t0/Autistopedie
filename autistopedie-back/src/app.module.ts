@@ -24,7 +24,7 @@ import { UserModule } from './resources/user/user.module';
         }),
         ServeStaticModule.forRoot({
             rootPath: join(__dirname, '../'),
-            renderPath: '/public/files',
+            renderPath: '/public/data-illustrations',
         }),
         MongooseModule.forRoot(process.env.DB_URL, {
             dbName: process.env.DB_NAME,

@@ -1,34 +1,65 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    HttpStatus,
+    Param,
+    ParseFilePipeBuilder,
+    Post,
+    UploadedFile,
+    UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ObjectId } from 'mongodb';
+import { Public } from 'src/decorators/public.decorator';
+import { Roles } from 'src/decorators/role.decorator';
+import { Role } from '../user/enums/role.enum';
 import { CreateIllustrationDto } from './dto/create-illustration.dto';
-import { UpdateIllustrationDto } from './dto/update-illustration.dto';
 import { IllustrationService } from './illustration.service';
 
 @Controller('illustrations')
 export class IllustrationController {
     constructor(private readonly illustrationService: IllustrationService) {}
 
+    @Roles(Role.ADMIN, Role.CONTRIBUTOR)
     @Post()
-    create(@Body() createIllustrationDto: CreateIllustrationDto) {
-        return this.illustrationService.create(createIllustrationDto);
+    @UseInterceptors(FileInterceptor('illustration'))
+    create(
+        @Body() createIllustrationDto: CreateIllustrationDto,
+        @UploadedFile(
+            new ParseFilePipeBuilder()
+                .addFileTypeValidator({
+                    fileType: '.(png|jpeg|jpg|wepb)',
+                })
+                .addMaxSizeValidator({
+                    maxSize: 80000,
+                })
+                .build({
+                    errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+                    fileIsRequired: true,
+                }),
+        )
+        illustration: Express.Multer.File,
+    ) {
+        return this.illustrationService.create(createIllustrationDto, illustration);
     }
 
+    @Roles(Role.ADMIN, Role.CONTRIBUTOR)
     @Get()
     findAll() {
         return this.illustrationService.findAll();
     }
 
+    @Public()
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.illustrationService.findOne(+id);
+    findOne(@Param('id') id: ObjectId | string) {
+        return this.illustrationService.findOne(new ObjectId(id));
     }
 
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() updateIllustrationDto: UpdateIllustrationDto) {
-        return this.illustrationService.update(+id, updateIllustrationDto);
-    }
-
+    @Roles(Role.ADMIN, Role.CONTRIBUTOR)
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.illustrationService.remove(+id);
+    remove(@Param('id') id: ObjectId | string) {
+        return this.illustrationService.remove(new ObjectId(id));
     }
 }

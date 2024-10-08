@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
@@ -21,4 +22,3 @@ export class ValidationPipe implements PipeTransform<any> {
         return !types.includes(metatype);
     }
 }
-

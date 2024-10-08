@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString, Length } from 'class-validator';
+import { IsArray, IsJSON, IsOptional, IsString, Length } from 'class-validator';
 import { ObjectId } from 'mongodb';
 import { Categorie } from '../enums/categorie.enum';
 
@@ -11,6 +11,10 @@ export class UpdateDataDto {
     @Length(0, 500)
     @IsOptional()
     summary: string;
+
+    @IsJSON()
+    @IsOptional()
+    contents: JSON;
 
     @IsString()
     @Length(0, 500)

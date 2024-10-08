@@ -19,6 +19,9 @@ export class Data {
     @Prop({ length: 500, nullable: true })
     summary: string;
 
+    @Prop()
+    contents: JSON;
+
     @Prop({ length: 500, nullable: false })
     authors: string;
 

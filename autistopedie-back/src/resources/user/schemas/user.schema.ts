@@ -21,7 +21,7 @@ export class User {
     @Prop({ nullable: false })
     hash: string;
 
-    @Prop({ default: Role.GHOST }) // wait for admin action to validate and turn into contributor
+    @Prop({ default: Role.READER }) // wait for admin action to validate and turn into contributor
     role: Role;
 
     @Prop({ type: mongoose.Schema.ObjectId, ref: 'Data' })

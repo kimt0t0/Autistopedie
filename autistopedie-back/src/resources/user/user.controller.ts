@@ -26,9 +26,21 @@ export class UserController {
     }
 
     @Public()
+    @Get('public')
+    findAllPublic() {
+        return this.userService.findAllPublic();
+    }
+
+    @Roles(Role.ADMIN, Role.CONTRIBUTOR)
     @Get(':id')
     findOne(@Param('id') id: ObjectId | string) {
         return this.userService.findOne(new ObjectId(id));
+    }
+
+    @Public()
+    @Get('public/:id')
+    findOnePublic(@Param('id') id: ObjectId | string) {
+        return this.userService.findOnePublic(new ObjectId(id));
     }
 
     @Patch(':id')

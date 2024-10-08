@@ -40,6 +40,7 @@ export class UserService {
                 hash,
                 role,
             };
+            if (!role) userData.role = Role.READER;
             const newUser = new this.userModel(userData);
             const createdUser = await newUser.save();
             delete createdUser.email;
@@ -68,12 +69,45 @@ export class UserService {
         }
     }
 
+    async findAllPublic(): Promise<Array<User>> {
+        try {
+            const users = await this.userModel
+                .find()
+                .select('username')
+                .select('createdAt')
+                .populate('addedData')
+                .exec();
+            return users;
+        } catch (e) {
+            console.error(
+                `Users could not be loaded due to error with code ${e.code}:  ${e.message}`,
+            );
+        }
+    }
+
     async findOne(id: ObjectId): Promise<User> {
         try {
             const selectedUser = await this.userModel
                 .findById(id)
                 .select('-hash')
                 .select('-email')
+                .populate('addedData')
+                .exec();
+            if (!selectedUser) throw new NotFoundException(`User with id ${id} was not found !`);
+            return selectedUser;
+        } catch (e) {
+            console.error(
+                `User with id ${id} could not be found due to error with code ${e.code}:  ${e.message}`,
+            );
+        }
+    }
+
+    async findOnePublic(id: ObjectId): Promise<User> {
+        try {
+            const selectedUser = await this.userModel
+                .findById(id)
+                .select('username')
+                .select('createdAt')
                 .populate('addedData')
                 .exec();
             if (!selectedUser) throw new NotFoundException(`User with id ${id} was not found !`);
@@ -119,14 +153,13 @@ export class UserService {
             if (newEmail) {
                 await this.userModel.findByIdAndUpdate(id, { email: newEmail }).exec();
             }
-            // todo: for role update check if auth user is admin
+            // if new role:
+            if (role && authenticatedUser.role == Role.ADMIN) {
+                await this.userModel.findByIdAndUpdate(id, { role });
+            }
             // update other data:
-            await this.userModel
-                .findByIdAndUpdate(id, {
-                    username: username,
-                    role: role,
-                })
-                .exec();
+            if (username) await this.userModel.findByIdAndUpdate(id, { username }).exec();
+            // return updated user:
             const updatedUser = await this.userModel.findById(id).exec();
             return updatedUser;
             // return updated user:

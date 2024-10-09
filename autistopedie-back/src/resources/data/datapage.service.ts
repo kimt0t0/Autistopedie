@@ -34,7 +34,7 @@ export class DataPageService {
                 .replace('Bearer ', '')
                 .replace(' ', '');
             const decodedToken: IDecodedToken = decodeToken(token);
-            const authenticatedUser = await this.userModel
+            const authenticatedUser: User = await this.userModel
                 .findById(new ObjectId(decodedToken._id))
                 .select('_id')
                 .select('role')
@@ -71,7 +71,7 @@ export class DataPageService {
 
     async findAll(): Promise<DataPage[]> {
         try {
-            const data = await this.dataPageModel
+            const data: DataPage[] = await this.dataPageModel
                 .find()
                 .populate('illustration')
                 .populate('dataAuthor')
@@ -86,7 +86,7 @@ export class DataPageService {
 
     async findOne(id: ObjectId): Promise<DataPage> {
         try {
-            const data = await this.dataPageModel
+            const data: DataPage = await this.dataPageModel
                 .findById(id)
                 .populate('illustration')
                 .populate('dataAuthor')
@@ -118,7 +118,7 @@ export class DataPageService {
                 );
             // save new data
             await this.dataPageModel.findByIdAndUpdate(id, { ...updateDataDto });
-            const updatedData = await this.dataPageModel
+            const updatedData: DataPage = await this.dataPageModel
                 .findById(id)
                 .populate('illustration')
                 .populate('dataAuthor')
@@ -144,14 +144,13 @@ export class DataPageService {
                 .replace('Bearer ', '')
                 .replace(' ', '');
             const decodedToken: IDecodedToken = decodeToken(token);
-            const authenticatedUser = await this.userModel
+            const authenticatedUser: User = await this.userModel
                 .findById(new ObjectId(decodedToken._id))
                 .select('email')
                 .select('hash')
                 .select('role')
                 .exec();
-            console.log(`Authenticated user`);
-            const dataPage = await this.dataPageModel
+            const dataPage: DataPage = await this.dataPageModel
                 .findById(new ObjectId(id))
                 .populate('dataAuthor')
                 .exec();
@@ -160,16 +159,16 @@ export class DataPageService {
                 authenticatedUser._id.toString() != dataPage.dataAuthor._id.toString()
             )
                 throw new UnauthorizedException(
-                    `A user account can be edited only by its owner or an admin account.`,
+                    `A datapage can be removed only by its owner or an admin account.`,
                 );
             const isPasswordMatch = bcrypt.compare(authenticatedUser.hash, password);
             if (!isPasswordMatch) throw new NotAcceptableException(`User password is incorrect.`);
             if (email != authenticatedUser.email)
                 throw new NotAcceptableException(`User email is incorrect.`);
-            // delete user
-            const deletedData = await this.dataPageModel
+            // delete datapage
+            const deletedData: DataPage = await this.dataPageModel
                 .findByIdAndDelete(id)
-                .select('id')
+                .select('_id')
                 .select('title')
                 .exec();
             return deletedData;

@@ -30,10 +30,10 @@ export class IllustrationController {
         @UploadedFile(
             new ParseFilePipeBuilder()
                 .addFileTypeValidator({
-                    fileType: '.(png|jpeg|jpg|wepb)',
+                    fileType: '.(png|jpeg|jpg|wepb|gif)',
                 })
                 .addMaxSizeValidator({
-                    maxSize: 80000,
+                    maxSize: 32000000,
                 })
                 .build({
                     errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
@@ -45,7 +45,7 @@ export class IllustrationController {
         return this.illustrationService.create(createIllustrationDto, illustration);
     }
 
-    @Roles(Role.ADMIN, Role.CONTRIBUTOR)
+    @Roles(Role.ADMIN)
     @Get()
     findAll() {
         return this.illustrationService.findAll();

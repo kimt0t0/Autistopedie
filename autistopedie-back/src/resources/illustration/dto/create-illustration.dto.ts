@@ -1,5 +1,5 @@
-import { IsString, Length } from "class-validator";
-import { ObjectId } from "mongodb";
+import { IsString, Length } from 'class-validator';
+import { ObjectId } from 'mongodb';
 
 export class CreateIllustrationDto {
     @IsString()

@@ -1,8 +1,9 @@
-import { IsArray, IsJSON, IsOptional, IsString, Length } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsArray, IsObject, IsOptional, IsString, Length } from 'class-validator';
 import { ObjectId } from 'mongodb';
 import { Categorie } from '../enums/categorie.enum';
 
-export class CreateDataDto {
+export class CreateDataPageDto {
     @IsString()
     @Length(3, 255)
     title: string;
@@ -12,9 +13,16 @@ export class CreateDataDto {
     @IsOptional()
     summary: string;
 
-    @IsJSON()
+    @IsObject()
+    @Transform(({ value }) => {
+        try {
+            return JSON.parse(value);
+        } catch (error) {
+            throw new Error('Invalid JSON format for contents');
+        }
+    })
     @IsOptional()
-    contents: JSON;
+    contents: object;
 
     @IsString()
     @Length(0, 500)
@@ -28,8 +36,4 @@ export class CreateDataDto {
     @Length(24)
     @IsOptional()
     illustrationId: string | ObjectId;
-
-    @IsString()
-    @Length(24)
-    dataAuthor: string | ObjectId;
 }

@@ -6,7 +6,7 @@ import { User } from 'src/resources/user/schemas/user.schema';
 import { Categorie } from '../enums/categorie.enum';
 
 @Schema({ timestamps: true })
-export class Data {
+export class DataPage {
     @Prop({
         type: ObjectId,
         default: () => new ObjectId(),
@@ -19,8 +19,9 @@ export class Data {
     @Prop({ length: 500, nullable: true })
     summary: string;
 
-    @Prop()
-    contents: JSON;
+    // JSON content not directly recognised by Mongoose and @Prop() decorator
+    @Prop({ type: mongoose.Schema.Types.Mixed, nullable: true })
+    contents: object;
 
     @Prop({ length: 500, nullable: false })
     authors: string;
@@ -35,4 +36,4 @@ export class Data {
     dataAuthor: User;
 }
 
-export const DataSchema = SchemaFactory.createForClass(Data);
+export const DataPageSchema = SchemaFactory.createForClass(DataPage);

@@ -1,6 +1,6 @@
 import { IsEmail, IsStrongPassword, Length } from 'class-validator';
 
-export class RemoveDataDto {
+export class RemoveDataPageDto {
     @IsEmail()
     @Length(8, 120)
     email: string;

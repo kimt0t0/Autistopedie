@@ -10,7 +10,7 @@ import { AppService } from './app.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RolesGuard } from './guards/role.guard';
 import { AuthModule } from './resources/auth/auth.module';
-import { DataModule } from './resources/data/data.module';
+import { DataPageModule } from './resources/data/datapage.module';
 import { IllustrationModule } from './resources/illustration/illustration.module';
 import { User, UserSchema } from './resources/user/schemas/user.schema';
 import { UserModule } from './resources/user/user.module';
@@ -39,7 +39,7 @@ import { UserModule } from './resources/user/user.module';
         MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
         AuthModule,
         UserModule,
-        DataModule,
+        DataPageModule,
         IllustrationModule,
     ],
     controllers: [AppController],

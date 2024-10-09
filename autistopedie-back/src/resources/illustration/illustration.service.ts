@@ -3,7 +3,7 @@ import { REQUEST } from '@nestjs/core';
 import { InjectModel } from '@nestjs/mongoose';
 import { ObjectId } from 'mongodb';
 import { Model } from 'mongoose';
-import { Data } from '../data/schemas/data.schema';
+import { DataPage } from '../data/schemas/datapage.schema';
 import { CreateIllustrationDto } from './dto/create-illustration.dto';
 import { Illustration } from './schemas/illustration.schema';
 
@@ -13,8 +13,8 @@ export class IllustrationService {
         @Inject(REQUEST) private request,
         @InjectModel(Illustration.name)
         private illustrationModel: Model<Illustration>,
-        @InjectModel(Data.name)
-        private dataModel: Model<Data>,
+        @InjectModel(DataPage.name)
+        private dataModel: Model<DataPage>,
     ) {}
 
     async create(createIllustrationDto: CreateIllustrationDto, illustration: Express.Multer.File) {
@@ -30,12 +30,12 @@ export class IllustrationService {
                 );
             }
             // save new illustration
-            const name: string = illustration.filename;
-            const path: string = illustration.path;
+            const filename: string = illustration.filename;
+            const filepath: string = illustration.path;
             const newIllustration = new this.illustrationModel({
                 dataIllustrated: new ObjectId(dataId),
-                name,
-                path,
+                filename,
+                filepath,
             });
             const createdIllustration: Illustration = await newIllustration.save();
             // add new illustration reference to data page

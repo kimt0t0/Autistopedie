@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
-import { Data } from 'src/resources/data/schemas/data.schema';
+import { DataPage } from 'src/resources/data/schemas/datapage.schema';
 import { Role } from '../enums/role.enum';
 
 @Schema({ timestamps: true })
@@ -25,7 +25,7 @@ export class User {
     role: Role;
 
     @Prop({ type: mongoose.Schema.ObjectId, ref: 'Data' })
-    addedData: Data[];
+    addedData: DataPage[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

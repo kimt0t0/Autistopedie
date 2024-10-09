@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { Data, DataSchema } from '../data/schemas/data.schema';
+import { DataPage, DataPageSchema } from '../data/schemas/datapage.schema';
 import { User, UserSchema } from '../user/schemas/user.schema';
 import { IllustrationController } from './illustration.controller';
 import { IllustrationService } from './illustration.service';
@@ -12,7 +12,7 @@ import { Illustration, IllustrationSchema } from './schemas/illustration.schema'
     imports: [
         MongooseModule.forFeature([
             { name: Illustration.name, schema: IllustrationSchema },
-            { name: Data.name, schema: DataSchema },
+            { name: DataPage.name, schema: DataPageSchema },
             { name: User.name, schema: UserSchema },
         ]),
         MulterModule.registerAsync({

@@ -9,24 +9,24 @@ import { decodeToken } from 'src/utils/token.util';
 import { Illustration } from '../illustration/schemas/illustration.schema';
 import { Role } from '../user/enums/role.enum';
 import { User } from '../user/schemas/user.schema';
-import { CreateDataDto } from './dto/create-data.dto';
-import { RemoveDataDto } from './dto/remove-data.dto';
-import { UpdateDataDto } from './dto/update-data.dto';
-import { Data } from './schemas/data.schema';
+import { CreateDataPageDto } from './dto/create-datapage.dto';
+import { RemoveDataPageDto } from './dto/remove-datapage.dto';
+import { UpdateDataPageDto } from './dto/update-datapage.dto';
+import { DataPage } from './schemas/datapage.schema';
 
 @Injectable()
-export class DataService {
+export class DataPageService {
     constructor(
         @Inject(REQUEST) private request,
         @InjectModel(User.name)
         private userModel: Model<User>,
-        @InjectModel(Data.name)
-        private dataModel: Model<Data>,
+        @InjectModel(DataPage.name)
+        private dataPageModel: Model<DataPage>,
         @InjectModel(Illustration.name)
-        private illustrationModel: Model<Data>,
+        private illustrationModel: Model<DataPage>,
     ) {}
 
-    async create(createDataDto: CreateDataDto): Promise<Data> {
+    async create(createDataDto: CreateDataPageDto): Promise<DataPage> {
         try {
             // check authenticated user is allowed to create data
             const token = this.request.rawHeaders
@@ -36,15 +36,32 @@ export class DataService {
             const decodedToken: IDecodedToken = decodeToken(token);
             const authenticatedUser = await this.userModel
                 .findById(new ObjectId(decodedToken._id))
+                .select('_id')
+                .select('role')
                 .exec();
-            if (authenticatedUser.role != (Role.ADMIN || Role.CONTRIBUTOR))
+            if (authenticatedUser.role != Role.ADMIN && authenticatedUser.role != Role.CONTRIBUTOR)
                 throw new UnauthorizedException(
                     'You cannot create new data without an admin or contributor account.',
                 );
             // save new data
-            const newData = new this.dataModel(createDataDto);
+            const newData = new this.dataPageModel(createDataDto);
+            newData.dataAuthor = authenticatedUser;
             const createdData = await newData.save();
-            return createdData;
+            // add data author
+            try {
+                await this.userModel.findByIdAndUpdate(new ObjectId(authenticatedUser._id), {
+                    addedData: createdData,
+                });
+            } catch (e) {
+                console.error(
+                    `New data could not be related to user account with id ${authenticatedUser._id} due to error with code ${e.code}: ${e.message}`,
+                );
+            }
+            return await this.dataPageModel
+                .findById(createdData._id)
+                .populate('dataAuthor')
+                .populate('illustration')
+                .exec();
         } catch (e) {
             console.error(
                 `Data could not be created due to error with code ${e.code}: ${e.message}`,
@@ -52,9 +69,9 @@ export class DataService {
         }
     }
 
-    async findAll(): Promise<Data[]> {
+    async findAll(): Promise<DataPage[]> {
         try {
-            const data = await this.dataModel
+            const data = await this.dataPageModel
                 .find()
                 .populate('illustration')
                 .populate('dataAuthor')
@@ -67,9 +84,9 @@ export class DataService {
         }
     }
 
-    async findOne(id: ObjectId): Promise<Data> {
+    async findOne(id: ObjectId): Promise<DataPage> {
         try {
-            const data = await this.dataModel
+            const data = await this.dataPageModel
                 .findById(id)
                 .populate('illustration')
                 .populate('dataAuthor')
@@ -82,7 +99,7 @@ export class DataService {
         }
     }
 
-    async update(id: ObjectId, updateDataDto: UpdateDataDto): Promise<Data> {
+    async update(id: ObjectId, updateDataDto: UpdateDataPageDto): Promise<DataPage> {
         try {
             // check authenticated user is allowed to create data
             const token = this.request.rawHeaders
@@ -92,19 +109,25 @@ export class DataService {
             const decodedToken: IDecodedToken = decodeToken(token);
             const authenticatedUser = await this.userModel
                 .findById(new ObjectId(decodedToken._id))
+                .select('_id')
+                .select('role')
                 .exec();
-            if (authenticatedUser.role != (Role.ADMIN || Role.CONTRIBUTOR))
+            if (authenticatedUser.role != Role.ADMIN && authenticatedUser.role != Role.CONTRIBUTOR)
                 throw new UnauthorizedException(
-                    'You cannot create new data without an admin or contributor account.',
+                    'You cannot update new data without an admin or contributor account.',
                 );
             // save new data
-            await this.dataModel.findByIdAndUpdate(id, { ...updateDataDto });
-            const updatedData = await this.dataModel
+            await this.dataPageModel.findByIdAndUpdate(id, { ...updateDataDto });
+            const updatedData = await this.dataPageModel
                 .findById(id)
                 .populate('illustration')
                 .populate('dataAuthor')
                 .exec();
-            return updatedData;
+            return await this.dataPageModel
+                .findById(updatedData._id)
+                .populate('dataAuthor')
+                .populate('illustration')
+                .exec();
         } catch (e) {
             console.error(
                 `Data with id ${id} could not be updated due to error with code ${e.code}: ${e.message}`,
@@ -112,7 +135,7 @@ export class DataService {
         }
     }
 
-    async remove(id: ObjectId, removeDataDto: RemoveDataDto): Promise<Data> {
+    async remove(id: ObjectId, removeDataDto: RemoveDataPageDto): Promise<DataPage> {
         try {
             const { email, password } = removeDataDto;
             // check authenticated user
@@ -122,11 +145,20 @@ export class DataService {
                 .replace(' ', '');
             const decodedToken: IDecodedToken = decodeToken(token);
             const authenticatedUser = await this.userModel
-                .findById(decodedToken._id)
+                .findById(new ObjectId(decodedToken._id))
                 .select('email')
-                .select('password')
+                .select('hash')
+                .select('role')
                 .exec();
-            if (authenticatedUser.role != Role.ADMIN && authenticatedUser._id != id)
+            console.log(`Authenticated user`);
+            const dataPage = await this.dataPageModel
+                .findById(new ObjectId(id))
+                .populate('dataAuthor')
+                .exec();
+            if (
+                authenticatedUser.role != Role.ADMIN &&
+                authenticatedUser._id.toString() != dataPage.dataAuthor._id.toString()
+            )
                 throw new UnauthorizedException(
                     `A user account can be edited only by its owner or an admin account.`,
                 );
@@ -135,10 +167,10 @@ export class DataService {
             if (email != authenticatedUser.email)
                 throw new NotAcceptableException(`User email is incorrect.`);
             // delete user
-            const deletedData = await this.dataModel
+            const deletedData = await this.dataPageModel
                 .findByIdAndDelete(id)
                 .select('id')
-                .select('username')
+                .select('title')
                 .exec();
             return deletedData;
         } catch (e) {

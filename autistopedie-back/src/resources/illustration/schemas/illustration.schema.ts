@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
-import { Data } from 'src/resources/data/schemas/data.schema';
+import { DataPage } from 'src/resources/data/schemas/datapage.schema';
 
 @Schema({ timestamps: true })
 export class Illustration {
@@ -18,7 +18,7 @@ export class Illustration {
     filepath: string;
 
     @Prop({ type: mongoose.Schema.ObjectId, ref: 'Data' })
-    dataIllustrated: Data;
+    dataIllustrated: DataPage;
 }
 
 export const IllustrationSchema = SchemaFactory.createForClass(Illustration);

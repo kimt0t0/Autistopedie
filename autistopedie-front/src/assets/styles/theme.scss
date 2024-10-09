@@ -1,0 +1,56 @@
+@import './global/fonts';
+@import './global/variables';
+
+body {
+    font-family: Lato, Verdana, Comic Sans, Helvetica, sans-serif;
+    background-color: $light;
+    color: $dark;
+    margin: 0;
+    padding: 0;
+}
+
+// Containers
+.classic-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+// Text styling
+h1, h2, h3 {
+    font-weight: 800;
+}
+
+h4, h5, h6 {
+    font-weight: 700px;
+}
+
+h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 700px
+}
+
+p, a, li {
+    font-size: 16px;
+    font-weight: 400;
+}

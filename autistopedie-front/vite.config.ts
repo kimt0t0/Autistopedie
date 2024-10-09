@@ -14,4 +14,11 @@ export default defineConfig({
             '@icons': fileURLToPath(new URL('./src/assets/icons', import.meta.url)),
         },
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "@/assets/styles/theme.scss";`,
+            },
+        },
+    },
 });

@@ -1,3 +1,11 @@
+# Environment
+.env*
+!.env.structure
+
+# Build
+.dist/*
+
+
 # Logs
 logs
 *.log

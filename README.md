@@ -9,4 +9,4 @@ Autistopédie est un projet de démonstration pour candidater en tant qu'ingéni
 
 ## Droit d'auteur
 Tous les contenus mis en ligne sur le site (donc sur la base de données) sont protégés par le droit d'auteur français.
-Le code du site est sous licence open-source GNU-GPL.
+Le code du site est sous licence open-source GNU-LGPL.

@@ -73,6 +73,10 @@ button {
         }
     }
     /* Sizes */
+    &.small {
+        font-size: $font-xs;
+        padding: $space-xs $space-s;
+    }
     /* Disabled */
 }
 </style>

@@ -21,10 +21,12 @@
 
 @mixin linkStyle() {
     box-sizing: border-box;
-    padding: $space-xxs $space-xs;
+    background-color: transparent;
+    cursor: pointer;
+    padding: $space-xxs $space-s $space-xs $space-xs;
     text-decoration: none;
     color: $secondary;
-    border-bottom: 2px solid transparent;
+    border: 2px solid transparent;
     @include transition();
     &:hover {
         border-bottom-color: $secondary;

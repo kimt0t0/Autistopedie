@@ -18,3 +18,15 @@
         color: $grey;
     }
 }
+
+@mixin linkStyle() {
+    box-sizing: border-box;
+    padding: $space-xxs $space-xs;
+    text-decoration: none;
+    color: $secondary;
+    border-bottom: 2px solid transparent;
+    @include transition();
+    &:hover {
+        border-bottom-color: $secondary;
+    }
+}

@@ -36,6 +36,9 @@ nav {
         &:hover {
             border-bottom-color: $primary;
         }
+        @media (max-width: $bp-xl) {
+            font-size: $font-s;
+        }
     }
     a.router-link-exact-active {
         color: $secondary;

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useAuthStore } from '@/stores/auth.store';
 import { useModalStore } from '@/stores/modal.store';
 import LoginForm from '../forms/LoginForm.vue';
 import SignupForm from '../forms/SignupForm.vue';
@@ -13,8 +14,8 @@ import SignupForm from '../forms/SignupForm.vue';
                 </Button>
             </div>
             <div class="contents">
-                <LoginForm />
-                <SignupForm />
+                <LoginForm v-if="useAuthStore().ownsAccount" />
+                <SignupForm v-else />
             </div>
         </div>
     </div>

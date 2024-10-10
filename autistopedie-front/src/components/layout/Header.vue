@@ -1,12 +1,13 @@
-<script lang="ts" setup></script>
+<script setup lang="ts">
+import NavDesktop from './NavDesktop.vue';
+import NavMobile from './NavMobile.vue';
+</script>
 
 <template>
     <header>
         <h1>AP</h1>
-        <nav>
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/about">About</RouterLink>
-        </nav>
+        <NavDesktop />
+        <NavMobile />
     </header>
 </template>
 
@@ -20,14 +21,9 @@ header {
     color: $light;
     border-bottom: 2px solid $grey;
     box-shadow: 0 0 8px 4px $grey;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    > a {
-        color: $light;
-        font-size: $font-m;
+    
+    @media (max-width: $bp-xxs) {
+        flex-direction: column;
     }
 }
 </style>

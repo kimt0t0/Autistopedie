@@ -1,0 +1,45 @@
+<script lang="ts" setup>
+import { useModalStore } from '@/stores/modal.store';
+import LoginForm from '../forms/LoginForm.vue';
+import SignupForm from '../forms/SignupForm.vue';
+</script>
+
+<template>
+    <div class="modal-container">
+        <div class="modal">
+            <div class="headband">
+                <Button @click="useModalStore().toggleIsShow()" color="grey">
+                    <door-closed-cancel-icon></door-closed-cancel-icon>
+                </Button>
+            </div>
+            <div class="contents">
+                <LoginForm />
+                <SignupForm />
+            </div>
+        </div>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+.modal {
+    box-sizing: border-box;
+    padding: $space-s;
+    border-radius: $radius-xs;
+    background-color: $light;
+    border: 2px solid $primary;
+    min-width: 400px;
+    @media (max-width: $bp-xs) {
+        min-width: initial;
+    }
+}
+
+.headband {
+    display: flex;
+    justify-content: flex-end;
+    > button {
+        width: 60px;
+        height: 60px;
+        border-radius: $circle;
+    }
+}
+</style>

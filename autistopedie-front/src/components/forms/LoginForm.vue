@@ -46,10 +46,15 @@ const onSubmit = async () => {
     if (useAuthStore().userAuth) setIsShowSuccess(true);
 }
 
-// Go to user dashboard
+// Actions after login
+const onClickVisit = ():void => {
+    useModalStore().toggleIsShow();
+    router.push('/');
+}
+
 const onClickAccount = ():void => {
     useModalStore().toggleIsShow();
-    router.push('/dashboard');
+    router.push('/mon-compte');
 }
 </script>
 
@@ -106,7 +111,7 @@ const onClickAccount = ():void => {
     </form>
 
     <SuccessMessage title="Connexion réussie !" v-if="useAuthStore().userAuth">
-        <Button color="secondary" @click="useModalStore().toggleIsShow()">Parcourir</Button>
+        <Button color="secondary" @click="onClickVisit()">Parcourir</Button>
         <Button color="success" @click="onClickAccount()">Mon compte</Button>
     </SuccessMessage>
 </template>
@@ -166,7 +171,7 @@ form {
     > input,
     textarea {
         width: 100%;
-        padding: $space-s $space-m;
+        padding: $space-m;
         background-color: transparent;
         font-weight: 600;
         border: transparent;

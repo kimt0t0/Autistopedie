@@ -1,20 +1,46 @@
 <script lang="ts" setup>
+import router from '@/router';
 import { useAuthStore } from '@/stores/auth.store';
 import { useModalStore } from '@/stores/modal.store';
+import { ref } from 'vue';
+
+const isShowUserMenu = ref<boolean>(false);
+const setIsShowUserMenu = (value: boolean): void => {
+    isShowUserMenu.value = !isShowUserMenu.value;
+}
+
+const onDisconnect = (): void => {
+    setIsShowUserMenu(false);
+    useAuthStore().resetAuth();
+    router.push('/');
+}
 </script>
 
 <template>
     <nav>
             <RouterLink to="/">Accueil</RouterLink>
             <RouterLink to="/definition">C'est quoi l'autisme ?</RouterLink>
-            <RouterLink to="/contribute">Je veux contribuer</RouterLink>
-            <RouterLink to="/about">A Propos</RouterLink>
-            <Button v-if="useAuthStore().userAuth" @click="useAuthStore().resetAuth()">
-                <account-off-icon></account-off-icon>
-            </Button>
-            <Button v-else @click="useModalStore().toggleIsShow()">
+            <RouterLink to="/contribuer">Je veux contribuer</RouterLink>
+            <RouterLink to="/a-propos">A Propos</RouterLink>
+            <!-- User auth modal button -->
+            <Button class="menu-button" v-if="!useAuthStore().userAuth" @click="useModalStore().toggleIsShow()">
                 <account-icon></account-icon>
             </Button>
+            <!-- User connected menu button -->
+            <div v-else class="user-menu-container">
+                <Button class="menu-button active" v-if="isShowUserMenu" @click="setIsShowUserMenu(true)">
+                    <cog-off-icon></cog-off-icon>
+                </Button>
+                <Button class="menu-button" v-else @click="setIsShowUserMenu(false)">
+                    <cog-icon></cog-icon>
+                </Button>
+                <div class="user-menu" v-if="isShowUserMenu">
+                    <RouterLink @click="setIsShowUserMenu(false)" to="/mon-compte">Tableau de bord</RouterLink>
+                    <Button color="grey" @click="onDisconnect()">
+                        Déconnexion
+                    </Button>
+                </div>
+            </div>
         </nav>
 </template>
 
@@ -44,10 +70,22 @@ nav {
         color: $secondary;
         border-bottom-color: $secondary;
     }
-    > button {
-        border-radius: $circle;
-        width: 60px;
-        height: 60px;
+}
+
+.menu-button {
+    border-radius: $circle;
+    width: 60px;
+    height: 60px;
+    &.active {
+        background-color: $primary;
+        color: $grey;
+    }
+}
+
+.user-menu-container {
+    position: relative;
+    > .user-menu {
+        @include menuStyle();
     }
 }
 </style>

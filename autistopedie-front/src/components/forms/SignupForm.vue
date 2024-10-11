@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Role } from '@/enums/Role.enum';
 import type ISignupData from '@/interfaces/ISignupData.interface';
+import router from '@/router';
 import { useAuthStore } from '@/stores/auth.store';
+import { useModalStore } from '@/stores/modal.store';
 import { emailValidator, passwordValidator, roleValidator, usernameValidator } from '@/validators/auth.validator';
 import { computed, reactive, ref } from 'vue';
 
@@ -45,6 +47,12 @@ const onSubmit = () => {
     // submit login
     // display validation message with buttons to close modale and/or go to dashboard
     alert(`User submitted with data: ${formData.username}, ${formData.email}, ${formData.password}, ${formData.role}`);
+}
+
+// Go to user dashboard
+const onClickAccount = ():void => {
+    useModalStore().toggleIsShow();
+    router.push('/dashboard');
 }
 </script>
 
@@ -112,6 +120,11 @@ const onSubmit = () => {
         </div>
 
     </form>
+
+    <SuccessMessage title="Inscription réussie !" v-if="useAuthStore().userAuth">
+        <Button color="secondary" @click="useModalStore().toggleIsShow()">Parcourir</Button>
+        <Button color="success" @click="onClickAccount()">Mon compte</Button>
+    </SuccessMessage>
 </template>
 
 <style lang="scss" scoped>

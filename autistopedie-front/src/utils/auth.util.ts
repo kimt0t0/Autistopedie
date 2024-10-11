@@ -8,7 +8,6 @@ import { jwtDecode } from "jwt-decode";
 // Login
 export const loginUtil = async(credentials: ILoginData): Promise<IJwtToken | void> => {
     try {
-        console.log(`credentials from util: ${credentials.username}, ${credentials.password}`)
         const jwtToken = await axiosInstance.post('/auth/login', credentials);
         return jwtToken.data;
     } catch (e) {

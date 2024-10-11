@@ -12,6 +12,10 @@ body {
     min-height: 100vh;
 }
 
+main {
+    padding: $space-xl 0;
+}
+
 // Containers
 .classic-container {
     max-width: 1200px;

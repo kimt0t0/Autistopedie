@@ -14,6 +14,8 @@ import Account from 'vue-material-design-icons/Account.vue';
 import AccountOff from 'vue-material-design-icons/AccountOff.vue';
 import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
 import ChevronUp from 'vue-material-design-icons/ChevronUp.vue';
+import Cog from 'vue-material-design-icons/Cog.vue';
+import CogOff from 'vue-material-design-icons/CogOff.vue';
 import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
@@ -36,6 +38,8 @@ app.component('account-icon', Account)
     .component('account-off-icon', AccountOff)
     .component('chevron-down-icon', ChevronDown)
     .component('chevron-up-icon', ChevronUp)
+    .component('cog-icon', Cog)
+    .component('cog-off-icon', CogOff)
     .component('door-closed-cancel-icon', DoorClosedCancel)
     .component('dots-vertical-icon', DotsVertical)
     .component('eye-icon', Eye)

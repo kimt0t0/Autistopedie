@@ -40,41 +40,6 @@ const toggleNav = (): void => {
     }
 }
 nav {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    background-color: $primary;
-    border: 2px solid $grey;
-    border-radius: $radius-xs;
-    box-shadow: 1px 2px 4px 1px $dark;
-    position: absolute;
-    top: 80px;
-    right: 0;
-    z-index: 2;
-    @media (max-width: $bp-xxs) {
-        width: 80vw;
-    }
-    > a {
-        box-sizing: border-box;
-        font-size: $font-m;
-        color: $grey;
-        border-bottom: 2px solid $grey;
-        padding: $space-s $space-m;
-        text-decoration: none;
-        &:hover {
-            background-color: $grey;
-            color: $primary;
-        }
-    }
-    a.router-link-exact-active {
-        color: $light;
-        background-color: $secondary;
-    }
-    > button {
-        border-radius: $circle;
-        width: 60px;
-        height: 60px;
-    }
+    @include menuStyle();
 }
 </style>

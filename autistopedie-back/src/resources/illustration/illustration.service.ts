@@ -35,7 +35,6 @@ export class IllustrationService {
                     .exec();
                 // if data page already has an illustration, remove it
                 if (data.illustration) {
-                    console.log(`Former illustration: ${data.illustration.filename}`);
                     await this.remove(new ObjectId(data.illustration._id));
                 }
             } catch (e) {

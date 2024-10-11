@@ -47,6 +47,7 @@ h4, h5, h6 {
 
 h2, h3, h4, h5, h6 {
     color: $grey;
+    margin: 0;
 }
 
 h1 {
@@ -69,7 +70,7 @@ h1 {
 }
 
 h2 {
-    font-size: 32px;
+    font-size: 48px;
 }
 
 h3 {
@@ -92,4 +93,8 @@ h6 {
 p, a, li {
     font-size: 16px;
     font-weight: 400;
+}
+
+a {
+    text-decoration: none;
 }

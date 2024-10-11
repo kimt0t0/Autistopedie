@@ -54,5 +54,8 @@ import { computed, reactive } from 'vue';
     display: flex;
     gap: $space-xl;
     flex-wrap: wrap;
+    @media (max-width: $bp-m) {
+        flex-direction: column;
+    }
 }
 </style>

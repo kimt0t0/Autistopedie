@@ -15,13 +15,12 @@ defineProps<{
 <style lang="scss" scoped>
 .hero-container {
     box-sizing: border-box;
-    padding: $space-l 0 $space-m;
+    padding: $space-xl 0 $space-l;
     > h2 {
         box-sizing: border-box;
         border-radius: $radius-xxs;
         width: fit-content;
         padding: $space-s $space-l $space-xxs $space-s;
-        margin: 0;
         border-bottom: 8px solid transparent;
         border-bottom-color: $grey;
         position: relative;

@@ -11,7 +11,7 @@ const toggleSearchBox = (): void => {
 <template>
     <div class="classic-container">
         <HeroTitle color="primary">Recherche</HeroTitle>
-        <Button class="search-button" color="grey" @click="toggleSearchBox()">
+        <Button :class="'search-button ' + (isShowSearchBox ? 'active' : '')" color="grey" @click="toggleSearchBox()">
             Filtres 
             <chevron-up-icon v-if="isShowSearchBox"></chevron-up-icon>
             <chevron-down-icon v-else></chevron-down-icon>

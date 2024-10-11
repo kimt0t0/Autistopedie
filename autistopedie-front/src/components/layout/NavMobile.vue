@@ -11,7 +11,7 @@ const toggleNav = (): void => {
 
 <template>
     <div class="mobile-nav-container">
-        <Button v-if="useAuthStore().isAuth" @click="useAuthStore().setIsAuth(false)">
+        <Button v-if="useAuthStore().userAuth" @click="useAuthStore().resetAuth()">
             <account-off-icon></account-off-icon>
         </Button>
         <Button v-else @click="useModalStore().toggleIsShow()">

@@ -6,7 +6,6 @@ import { ObjectId } from 'mongodb';
 import { Model } from 'mongoose';
 import { IDecodedToken } from 'src/interfaces/IDecodedToken';
 import { decodeToken } from 'src/utils/token.util';
-import { Illustration } from '../illustration/schemas/illustration.schema';
 import { Role } from '../user/enums/role.enum';
 import { User } from '../user/schemas/user.schema';
 import { CreateDataPageDto } from './dto/create-datapage.dto';
@@ -22,8 +21,6 @@ export class DataPageService {
         private userModel: Model<User>,
         @InjectModel(DataPage.name)
         private dataPageModel: Model<DataPage>,
-        @InjectModel(Illustration.name)
-        private illustrationModel: Model<DataPage>,
     ) {}
 
     async create(createDataDto: CreateDataPageDto): Promise<DataPage> {

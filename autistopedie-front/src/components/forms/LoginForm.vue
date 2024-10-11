@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useAuth } from '@/composables/auth.composable';
 import type ILoginData from '@/interfaces/ILoginData.interface';
+import router from '@/router';
 import { useAuthStore } from '@/stores/auth.store';
+import { useModalStore } from '@/stores/modal.store';
 import { passwordValidator, usernameValidator } from '@/validators/auth.validator';
 import { computed, reactive, ref } from 'vue';
 
@@ -16,6 +19,12 @@ const toggleIsPasswordHidden = ():void => {
     isPasswordHidden.value = !isPasswordHidden.value;
 }
 
+// Show / hide success form submission
+const isShowSuccess = ref<boolean>(false);
+const setIsShowSuccess = (value: boolean): void => {
+    isShowSuccess.value = !isShowSuccess.value;
+}
+
 // Validate form
 const formIsValid = computed(() => {
     return (
@@ -25,7 +34,7 @@ const formIsValid = computed(() => {
 });
 
 // Submit form
-const onSubmit = () => {
+const onSubmit = async () => {
     if (!formIsValid) {
         throw new Error(
             `Attempted to submit invalid form. Form validation results are as follow:
@@ -33,9 +42,14 @@ const onSubmit = () => {
             ${passwordValidator(formData.password)}`
         );
     }
-    // todo: submit submit login
-    // display validation message with buttons to close modale and/or go to dashboard
-    alert(`User submitted with data: ${formData.username}, ${formData.password}`);
+    useAuth().login(formData);
+    if (useAuthStore().userAuth) setIsShowSuccess(true);
+}
+
+// Go to user dashboard
+const onClickAccount = ():void => {
+    useModalStore().toggleIsShow();
+    router.push('/dashboard');
 }
 </script>
 
@@ -90,6 +104,11 @@ const onSubmit = () => {
         </div>
 
     </form>
+
+    <SuccessMessage title="Connexion réussie !" v-if="useAuthStore().userAuth">
+        <Button color="secondary" @click="useModalStore().toggleIsShow()">Parcourir</Button>
+        <Button color="success" @click="onClickAccount()">Mon compte</Button>
+    </SuccessMessage>
 </template>
 
 <style lang="scss" scoped>
@@ -107,7 +126,7 @@ form {
     width: 500px;
     display: flex;
     flex-direction: column;
-    margin-top: $space-l;
+    margin: $space-l 0 $space-m;
     gap: $space-l;
     @media (max-width: $bp-s) {
         min-width: initial;
@@ -186,5 +205,10 @@ form {
             font-weight: 200;
         }
     }
+}
+
+.button-style-link {
+    @include buttonStyle();
+    width: fit-content;
 }
 </style>

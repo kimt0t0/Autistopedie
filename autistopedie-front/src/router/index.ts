@@ -28,6 +28,11 @@ const router = createRouter({
             name: 'data-page',
             component: () => import('../views/DataPageView.vue'),
         },
+        {
+            path: '/mon-compte',
+            name: 'dashboard',
+            component: () => import('../views/DashboardView.vue'),
+        }
     ],
 });
 

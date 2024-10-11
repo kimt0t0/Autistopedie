@@ -19,7 +19,7 @@ button {
     &.light {
         border-color: $light;
         color: $light;
-        &:hover {
+        &:hover, &.active {
             background-color: $light;
             color: $grey;
         }
@@ -27,7 +27,7 @@ button {
     &.dark {
         border-color: $dark;
         color: $dark;
-        &:hover {
+        &:hover, &.active {
             background-color: $dark;
             color: $primary;
         }
@@ -35,7 +35,7 @@ button {
     &.grey {
         border-color: $grey;
         color: $grey;
-        &:hover {
+        &:hover, &.active {
             background-color: $grey;
             color: $light;
         }
@@ -43,7 +43,7 @@ button {
     &.secondary {
         border-color: $secondary;
         color: $secondary;
-        &:hover {
+        &:hover, &.active {
             background-color: $secondary;
             color: $light;
         }
@@ -51,7 +51,7 @@ button {
     &.shadows {
         border-color: $shadows;
         color: $shadows;
-        &:hover {
+        &:hover, &.active {
             background-color: $shadows;
             color: $light;
         }
@@ -59,7 +59,7 @@ button {
     &.success {
         border-color: $success;
         color: $success;
-        &:hover {
+        &:hover, &.active {
             background-color: $success;
             color: $light;
         }
@@ -67,7 +67,7 @@ button {
     &.alert {
         border-color: $alert;
         color: $alert;
-        &:hover {
+        &:hover, &.active {
             background-color: $alert;
             color: $light;
         }
@@ -78,5 +78,13 @@ button {
         padding: $space-xs $space-s;
     }
     /* Disabled */
+    &:disabled, &:disabled:hover {
+        cursor: initial;
+        border-radius: $radius-xs;
+        color: $dark;
+        font-weight: 500;
+        background-color: lighten($dark, 60);
+        border-color: $dark;
+    }
 }
 </style>

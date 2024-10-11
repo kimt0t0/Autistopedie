@@ -9,7 +9,7 @@ import { useModalStore } from '@/stores/modal.store';
             <RouterLink to="/definition">C'est quoi l'autisme ?</RouterLink>
             <RouterLink to="/contribute">Je veux contribuer</RouterLink>
             <RouterLink to="/about">A Propos</RouterLink>
-            <Button v-if="useAuthStore().isAuth" @click="useAuthStore().setIsAuth(false)">
+            <Button v-if="useAuthStore().userAuth" @click="useAuthStore().resetAuth()">
                 <account-off-icon></account-off-icon>
             </Button>
             <Button v-else @click="useModalStore().toggleIsShow()">

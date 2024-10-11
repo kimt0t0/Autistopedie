@@ -2,21 +2,33 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useAuthStore = defineStore('auth', () => {
-    const isAuth = ref<boolean>(false);
-    const ownsAccount = ref<boolean>(true);
+    // Authentification state
+    const userAuth = ref<string | null>();;
+    
+    const setAuth = (access_token: string): void => {
+        localStorage.clear();
+        localStorage.setItem('authenticatedUser', access_token);
+        userAuth.value = localStorage.getItem('authenticatedUser');
+    };
 
-    const setIsAuth = (value: boolean): void => {
-        isAuth.value = value;
-    }
+    const resetAuth = (): void => {
+        localStorage.clear();
+        userAuth.value = null;
+    };
+    const ownsAccount = ref<boolean>(true);
 
     const setOwnsAccount = (value: boolean): void => {
         ownsAccount.value = value;
     }
 
     return {
-        isAuth,
+        // toggle login/signup form in modal
         ownsAccount,
-        setIsAuth,
-        setOwnsAccount
+        setOwnsAccount,
+        // user when auth
+        userAuth,
+        // login / disconnect functions
+        setAuth,
+        resetAuth,
     }
 })

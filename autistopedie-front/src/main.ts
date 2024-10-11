@@ -18,6 +18,7 @@ import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
 import EyeOff from 'vue-material-design-icons/EyeOff.vue';
+import SuccessMessage from './components/global/SuccessMessage.vue';
 
 const app = createApp(App);
 
@@ -27,7 +28,8 @@ app.use(router);
 // Global components
 app.component('Button', Button)
     .component('ErrorMessage', ErrorMessage)
-    .component('HeroTitle', HeroTitle);
+    .component('HeroTitle', HeroTitle)
+    .component('SuccessMessage', SuccessMessage);
 
 // Icons from Vue Material Icons
 app.component('account-icon', Account)

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Role } from '@/enums/Role.enum';
 import type ISignupData from '@/interfaces/ISignupData.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { emailValidator, passwordValidator, roleValidator, usernameValidator } from '@/validators/auth.validator';
@@ -9,7 +10,7 @@ const formData = reactive<ISignupData>({
     username: '',
     email: '',
     password: '',
-    role: undefined,
+    role: Role.READER,
 });
 
 // Show / hide password
@@ -19,7 +20,7 @@ const toggleIsPasswordHidden = (): void => {
     isPasswordHidden.value = !isPasswordHidden.value;
 };
 
-// Check if form is valid
+// Validate form
 const formIsValid = computed((): boolean => {
     return (
         usernameValidator(formData.username).isValid &&
@@ -82,6 +83,7 @@ const onSubmit = () => {
             </div>
             <ErrorMessage v-if="formData.email.length > 0" :validation="emailValidator(formData.email)" />
         </div>
+
         <!-- Password -->
         <div class="input-group">
             <div :class="'input-container password-container' + (formData.password.length > 0 ? ' has-value' : '')">
@@ -103,9 +105,12 @@ const onSubmit = () => {
             </div>
             <ErrorMessage v-if="formData.password.length > 0" :validation="passwordValidator(formData.password)" />
         </div>
+
+        <!-- Submit button -->
         <div class="center-content">
             <Button type="submit" color="secondary" :disabled="!formIsValid">Envoyer</Button>
         </div>
+
     </form>
 </template>
 
@@ -120,10 +125,16 @@ h2 {
 
 form {
     box-sizing: border-box;
+    min-width: 500px;
+    width: 500px;
     display: flex;
     flex-direction: column;
     margin-top: $space-l;
     gap: $space-l;
+    @media (max-width: $bp-s) {
+        min-width: initial;
+        width: initial;
+    }
 }
 
 .input-group {
@@ -134,14 +145,21 @@ form {
 
 .input-container {
     box-sizing: border-box;
+    min-width: 280px;
     width: 280px;
     max-width: 280px;
     display: flex;
     justify-content: space-between;
-    border: 3px solid $grey;
+    border: 3px solid $shadows;
     border-radius: $radius-xs;
     position: relative;
+    @media (max-width: $bp-xxs) {
+        min-width: 90%;
+        width: 90%;
+        max-width: 90%;
+        }
     > label {
+        color: $shadows;
         text-transform: capitalize;
         position: absolute;
         top: $space-s;
@@ -150,6 +168,7 @@ form {
     }
     > input,
     textarea {
+        width: 100%;
         padding: $space-s $space-m;
         background-color: transparent;
         font-weight: 600;
@@ -161,9 +180,6 @@ form {
         }
         &:focus {
             color: $grey;
-            &.colored-dark {
-                color: $grey;
-            }
             + label {
                 transform: translate(-$space-m, -$space-l);
                 font-size: $font-xs;
@@ -177,8 +193,11 @@ form {
     &.has-value {
         > input,
         > textarea {
-            color: $grey;
+            color: $shadows;
             &.colored-dark {
+                color: $shadows;
+            }
+            &:focus {
                 color: $grey;
             }
         }

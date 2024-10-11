@@ -16,6 +16,7 @@ defineProps<{
     font-size: $font-xxs;
     font-weight: 600;
     text-align: justify;
+    text-wrap: wrap;
     white-space: normal;
     max-width: 500px;
 }

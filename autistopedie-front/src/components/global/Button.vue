@@ -37,7 +37,7 @@ button {
         color: $grey;
         &:hover {
             background-color: $grey;
-            color: $primary;
+            color: $light;
         }
     }
     &.secondary {

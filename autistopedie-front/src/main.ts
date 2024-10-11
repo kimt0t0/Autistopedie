@@ -7,10 +7,13 @@ import router from './router';
 // Global components
 import Button from './components/global/Button.vue';
 import ErrorMessage from './components/global/ErrorMessage.vue';
+import HeroTitle from './components/global/HeroTitle.vue';
 
 // Icons from Vue Material Icons
 import Account from 'vue-material-design-icons/Account.vue';
 import AccountOff from 'vue-material-design-icons/AccountOff.vue';
+import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
+import ChevronUp from 'vue-material-design-icons/ChevronUp.vue';
 import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
@@ -23,11 +26,14 @@ app.use(router);
 
 // Global components
 app.component('Button', Button)
-    .component('ErrorMessage', ErrorMessage);
+    .component('ErrorMessage', ErrorMessage)
+    .component('HeroTitle', HeroTitle);
 
 // Icons from Vue Material Icons
 app.component('account-icon', Account)
     .component('account-off-icon', AccountOff)
+    .component('chevron-down-icon', ChevronDown)
+    .component('chevron-up-icon', ChevronUp)
     .component('door-closed-cancel-icon', DoorClosedCancel)
     .component('dots-vertical-icon', DotsVertical)
     .component('eye-icon', Eye)

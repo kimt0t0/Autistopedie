@@ -69,7 +69,7 @@ button {
         color: $alert;
         &:hover {
             background-color: $alert;
-            color: $alert;
+            color: $light;
         }
     }
     /* Sizes */

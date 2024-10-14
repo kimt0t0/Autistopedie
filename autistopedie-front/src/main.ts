@@ -9,7 +9,16 @@ import Button from './components/global/Button.vue';
 import ErrorMessage from './components/global/ErrorMessage.vue';
 import HeroTitle from './components/global/HeroTitle.vue';
 
+// Quill as a component
+import { Quill, QuillEditor } from '@vueup/vue-quill';
+// Formatter for images and videos
+import BlotFormatter from 'quill-blot-formatter';
+// Quill UI themes (test and choose one)
+import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 // Icons from Vue Material Icons
+import MagicUrl from 'quill-magic-url';
 import Account from 'vue-material-design-icons/Account.vue';
 import AccountOff from 'vue-material-design-icons/AccountOff.vue';
 import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
@@ -32,6 +41,12 @@ app.component('Button', Button)
     .component('ErrorMessage', ErrorMessage)
     .component('HeroTitle', HeroTitle)
     .component('SuccessMessage', SuccessMessage);
+
+// Import Quill library as a component
+app.component('QuillEditor', QuillEditor);
+// detects emails and URLs in the editor and automatically converts to link
+Quill.register('modules/magicUrl', MagicUrl);
+Quill.register('modules/blotFormatter', BlotFormatter)
 
 // Icons from Vue Material Icons
 app.component('account-icon', Account)

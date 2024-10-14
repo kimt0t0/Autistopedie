@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 export const useAuthStore = defineStore('auth', () => {
     // Authentification state
-    const userAuth = ref<string | null>();;
+    const userAuth = ref<string | null>();
     
     const setAuth = (access_token: string): void => {
         localStorage.clear();

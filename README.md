@@ -15,6 +15,7 @@ Le code du site est sous licence open-source GNU-LGPL.
 <details>
 <summary>To-do Front-end</summary>
 
+- Load data (authentified user for dashboard, datapages, all users for admin only)
 - Add icons new page and edit page
 - Add page guard for pages not allowed to unauthentified users
 </details>

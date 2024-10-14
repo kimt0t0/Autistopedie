@@ -1,4 +1,5 @@
 import { Role } from '@/enums/Role.enum';
+import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
 import type { IValidation } from '@/interfaces/IValidation.interface';
 
 export const validateInput = (input: string, validator: 'username' | 'email' | 'password'): IValidation => {
@@ -55,5 +56,18 @@ export const roleValidator = (input?: Role): IValidation => {
     return {
         isValid: false,
         errorMessage: "Ce rôle n'existe pas. Veuillez sélectionner un rôle dans la liste."
+    }
+}
+
+export const editRoleValidator = (user: IUserAccountData, input?: Role): IValidation => {
+    if (!input) return {isValid: true}
+    else if (user.role != Role.ADMIN) {
+        return {
+            isValid: false,
+            errorMessage: "Vous ne pouvez pas modifier le rôle d'un utilisateur si vous n'êtes pas un administrateur. Si vous souhaitez obtenir un nouveau rôle, veuillez contacter le support s'il-vous-plaît."
+        }
+    }
+    return {
+        isValid: true
     }
 }

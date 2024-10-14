@@ -23,7 +23,7 @@ export class DataPage {
     @Prop({ type: mongoose.Schema.Types.Mixed, nullable: true })
     contents: object;
 
-    @Prop({ length: 500, nullable: false })
+    @Prop({ length: 500, nullable: true })
     authors: string;
 
     @Prop({ nullable: false, default: [Categorie.OTHER] })

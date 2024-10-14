@@ -26,6 +26,7 @@ export class CreateDataPageDto {
 
     @IsString()
     @Length(0, 500)
+    @IsOptional()
     authors: string;
 
     @IsArray()

@@ -18,7 +18,7 @@ export const validateInput = (input: string, validator: 'username' | 'email' | '
 };
 
 export const usernameValidator = (input: string): IValidation => {
-    const re = /^[A-Za-z\d'_\-*]{3,50}$/;
+    const re = /^[A-Za-z\d'_\-*]{3,80}$/;
 
     return {
         isValid: re.test(input),

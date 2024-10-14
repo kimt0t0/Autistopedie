@@ -25,20 +25,34 @@ main {
 }
 
 .modal-container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 3;
-        background-color: rgba(0, 0, 0, 0.6);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
-// Page display and modal
+// Contents general display rules
+.center-content {
+    display: flex;
+    justify-content: center;
+    &.vertical {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.horizontal-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-m;
+}
 
 // Text styling
 h1, h2, h3 {
@@ -101,4 +115,108 @@ p, a, li {
 
 a {
     text-decoration: none;
+}
+
+// Forms
+form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: $space-l 0 $space-m;
+    gap: $space-l;
+    @media (max-width: $bp-s) {
+        min-width: initial;
+        width: initial;
+    }
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-xxs;
+}
+
+.input-container {
+    box-sizing: border-box;
+    min-width: 280px;
+    width: 280px;
+    max-width: 280px;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    border: 3px solid $shadows;
+    border-radius: $radius-xs;
+    position: relative;
+    &.textarea {
+        width: initial;
+        max-width: 600px;
+        height: initial;
+        min-height: 120px;
+    }
+    @media (max-width: $bp-xxs) {
+        min-width: 90%;
+        width: 90%;
+        max-width: 90%;
+        }
+    > label {
+        color: $shadows;
+        text-transform: capitalize;
+        position: absolute;
+        top: $space-s;
+        left: $space-m;
+        transition: all 200ms ease-in;
+    }
+    > input,
+    textarea {
+        width: 100%;
+        @include classicPadding();
+        background-color: transparent;
+        font-weight: 600;
+        border: transparent;
+        @media (max-width: $bp-xs) {
+            width: 100%;
+            min-width: initial;
+            max-width: initial;
+        }
+        &:focus {
+            color: $grey;
+            + label {
+                transform: translate(-$space-m, -$space-l);
+                font-size: $font-xs;
+                font-weight: 200;
+            }
+        }
+    }
+    &.has-value {
+        > input,
+        > textarea {
+            color: $shadows;
+            &.colored-dark {
+                color: $shadows;
+            }
+            &:focus {
+                color: $grey;
+            }
+        }
+        > label,
+        > input:focus + label {
+            transform: translate(-$space-m, -$space-l);
+            font-size: $font-xs;
+            font-weight: 200;
+        }
+    }
+}
+
+input, textarea {
+    font-size: $font-s;
+    font-family: Lato, Verdana, Comic Sans, Helvetica, sans-serif;
+}
+
+button {
+    width: fit-content;
+}
+
+// Center icon in all components
+.material-design-icon {
+    padding-top: $space-xs;
 }

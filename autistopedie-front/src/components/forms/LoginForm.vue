@@ -150,6 +150,7 @@ form {
     min-width: 280px;
     width: 280px;
     max-width: 280px;
+    height: 45px;
     display: flex;
     justify-content: space-between;
     border: 3px solid $shadows;
@@ -171,7 +172,7 @@ form {
     > input,
     textarea {
         width: 100%;
-        padding: $space-m;
+        @include classicPadding();
         background-color: transparent;
         font-weight: 600;
         border: transparent;

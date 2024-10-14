@@ -3,6 +3,8 @@ import { ref } from 'vue';
 
 defineProps<{
     title: string
+    color?: string
+    thin?: boolean
 }>();
 
 const isShow = ref<boolean>(false);
@@ -12,8 +14,8 @@ const toggleIsShow = (): void => {
 </script>
 
 <template>
-    <div class="dropdown">
-        <Button :class="'button-dropdown ' + (isShow ? 'active': '')" @click="toggleIsShow()">
+    <div :class="'dropdown ' + color + (thin ? ' thin' : '')">
+        <Button type="button" :class="'button-dropdown ' + (isShow ? 'active': '')" :color="color" @click="toggleIsShow()">
             {{  title }}
             <chevron-up-icon v-if="isShow"></chevron-up-icon>
             <chevron-down-icon v-else></chevron-down-icon>
@@ -29,19 +31,41 @@ const toggleIsShow = (): void => {
     box-sizing: border-box;
     border: 3px solid $primary;
     border-radius: $radius-xs;
+    &.light {
+        border-color: $light;
+    }
+    &.dark {
+        border-color: $dark;
+    }
+    &.grey {
+        border-color: $grey;
+    }
+    &.secondary {
+        border-color: $secondary;
+    }
+    &.shadows {
+        border-color: $shadows;
+    }
+    &.success {
+        border-color: $success;
+    }
+    &.alert {
+        border-color: $alert;
+    }
+    &.thin {
+        border: 1px solid transparent;
+    }
 }
 
 .button-dropdown {
     width: 100%;
     justify-content: space-between;
-    >.material-design-icon {
-        padding-top: $space-xs;
-    }
 }
 
 .dropdown-contents {
     @include classicPadding();
     font-size: $font-m;
     position: relative;
+    color: $dark;
 }
 </style>

@@ -6,4 +6,6 @@ export interface IIllustration {
     filename: string;
     filepath: string;
     dataIllustrated: IDataPage;
+    createdAt?: Date;
+    updatedAd?: Date;
 }

@@ -1,4 +1,5 @@
 import type { Role } from "@/enums/Role.enum";
+import type { IDataPage } from "./IDataPage.interface";
 
 export interface IUserAccountData {
     username: string;
@@ -7,4 +8,7 @@ export interface IUserAccountData {
     password?: string;
     newPassword?: string;
     role?: Role;
+    addedData?: IDataPage[];
+    createdAt?: Date;
+    updatedAd?: Date;
 }

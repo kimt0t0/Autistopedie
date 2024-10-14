@@ -3,11 +3,12 @@ defineProps<{
     color?: string; //use existing color variable name
     size?: string; // use small / medium / large
     disabled?: boolean;
+    shape?: string; // use round if necessary
 }>()
 </script>
 
 <template>
-    <button :class="color + ' ' + size" :disabled="disabled">
+    <button :class="color + ' ' + size + ' ' + shape" :disabled="disabled">
         <slot></slot>
     </button>
 </template>
@@ -85,6 +86,12 @@ button {
         font-weight: 500;
         background-color: lighten($dark, 60);
         border-color: $dark;
+    }
+    /* Shape */
+    &.round {
+        width: 60px;
+        height: 60px;
+        border-radius: $circle;
     }
 }
 </style>

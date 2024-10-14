@@ -23,8 +23,8 @@ const toggleNav = (): void => {
         <nav v-if="showNav">
                 <RouterLink to="/">Accueil</RouterLink>
                 <RouterLink to="/definition">C'est quoi l'autisme ?</RouterLink>
-                <RouterLink to="/contribute">Je veux contribuer</RouterLink>
-                <RouterLink to="/about">A Propos</RouterLink>
+                <RouterLink to="/contribuer">Je veux contribuer</RouterLink>
+                <RouterLink to="/a-propos">A Propos</RouterLink>
             </nav>
     </div>
 </template>

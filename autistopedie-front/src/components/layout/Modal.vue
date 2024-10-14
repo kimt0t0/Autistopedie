@@ -9,7 +9,7 @@ import SignupForm from '../forms/SignupForm.vue';
     <div class="modal-container">
         <div class="modal">
             <div class="headband">
-                <Button @click="useModalStore().toggleIsShow()" color="grey">
+                <Button shape="round" @click="useModalStore().toggleIsShow()" color="grey">
                     <door-closed-cancel-icon></door-closed-cancel-icon>
                 </Button>
             </div>
@@ -37,10 +37,5 @@ import SignupForm from '../forms/SignupForm.vue';
 .headband {
     display: flex;
     justify-content: flex-end;
-    > button {
-        width: 60px;
-        height: 60px;
-        border-radius: $circle;
-    }
 }
 </style>

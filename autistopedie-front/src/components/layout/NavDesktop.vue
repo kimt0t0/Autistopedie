@@ -23,20 +23,20 @@ const onDisconnect = (): void => {
             <RouterLink to="/contribuer">Je veux contribuer</RouterLink>
             <RouterLink to="/a-propos">A Propos</RouterLink>
             <!-- User auth modal button -->
-            <Button class="menu-button" v-if="!useAuthStore().userAuth" @click="useModalStore().toggleIsShow()">
+            <Button shape="round" v-if="!useAuthStore().userAuth" @click="useModalStore().toggleIsShow()">
                 <account-icon></account-icon>
             </Button>
             <!-- User connected menu button -->
             <div v-else class="user-menu-container">
-                <Button class="menu-button active" v-if="isShowUserMenu" @click="setIsShowUserMenu(true)">
+                <Button class="active" shape="round" v-if="isShowUserMenu" @click="setIsShowUserMenu(true)">
                     <cog-off-icon></cog-off-icon>
                 </Button>
-                <Button class="menu-button" v-else @click="setIsShowUserMenu(false)">
+                <Button shape="round" v-else @click="setIsShowUserMenu(false)">
                     <cog-icon></cog-icon>
                 </Button>
                 <div class="user-menu" v-if="isShowUserMenu">
                     <RouterLink @click="setIsShowUserMenu(false)" to="/mon-compte">Tableau de bord</RouterLink>
-                    <Button color="grey" @click="onDisconnect()">
+                    <Button color="grey" shape="round" @click="onDisconnect()">
                         Déconnexion
                     </Button>
                 </div>
@@ -69,16 +69,6 @@ nav {
     a.router-link-exact-active {
         color: $secondary;
         border-bottom-color: $secondary;
-    }
-}
-
-.menu-button {
-    border-radius: $circle;
-    width: 60px;
-    height: 60px;
-    &.active {
-        background-color: $primary;
-        color: $grey;
     }
 }
 

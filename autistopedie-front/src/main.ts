@@ -6,8 +6,10 @@ import router from './router';
 
 // Global components
 import Button from './components/global/Button.vue';
+import Dropdown from './components/global/Dropdown.vue';
 import ErrorMessage from './components/global/ErrorMessage.vue';
 import HeroTitle from './components/global/HeroTitle.vue';
+import SuccessMessage from './components/global/SuccessMessage.vue';
 
 // Quill as a component
 import { Quill, QuillEditor } from '@vueup/vue-quill';
@@ -29,7 +31,7 @@ import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
 import EyeOff from 'vue-material-design-icons/EyeOff.vue';
-import SuccessMessage from './components/global/SuccessMessage.vue';
+import Pencil from 'vue-material-design-icons/Pencil.vue';
 
 const app = createApp(App);
 
@@ -38,6 +40,7 @@ app.use(router);
 
 // Global components
 app.component('Button', Button)
+    .component('Dropdown', Dropdown)
     .component('ErrorMessage', ErrorMessage)
     .component('HeroTitle', HeroTitle)
     .component('SuccessMessage', SuccessMessage);
@@ -58,6 +61,7 @@ app.component('account-icon', Account)
     .component('door-closed-cancel-icon', DoorClosedCancel)
     .component('dots-vertical-icon', DotsVertical)
     .component('eye-icon', Eye)
-    .component('eye-off-icon', EyeOff);
+    .component('eye-off-icon', EyeOff)
+    .component('pencil-icon', Pencil);
 
 app.mount('#app');

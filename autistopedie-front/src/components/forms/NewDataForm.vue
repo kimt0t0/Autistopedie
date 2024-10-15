@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { useAuth } from '@/composables/auth.composable';
+import { useDataPage } from '@/composables/datapage.composable';
 import { Category } from '@/enums/Category.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
 import { authorsValidator, categoriesValidator, summaryValidator, titleValidator } from '@/validators/data.validator';
+import type { Delta, QuillEditor } from '@vueup/vue-quill';
 import { computed, onBeforeMount, reactive, ref } from 'vue';
 import SuccessMessage from '../global/SuccessMessage.vue';
 
@@ -19,6 +21,7 @@ const formData = reactive<IDataPage>({
     title: "",
     authors: "",
     categories: [],
+    contents: undefined,
     dataAuthor: user.value
 });
 
@@ -43,6 +46,17 @@ const formIsValid = computed((): boolean => {
     );
 });
 
+// Quill editor reference
+const quillRef = ref<InstanceType<typeof QuillEditor> | null>(null);
+
+// Get Quill content as HTML
+const getQuillContent = (): Delta | string | undefined => {
+    if (quillRef.value) {
+        return quillRef.value.getContents();
+    }
+    return "";
+}
+
 // Check if creation worked
 const createdIsSuccess = ref<boolean>(false);
 const setCreatedIsSuccess = (value: boolean): void => {
@@ -56,7 +70,11 @@ const setIsAddIllustration = (value: boolean) :void => {
 }
 // Submit form
 const onSubmit = (): void => {
-    alert(`Enregistrement des données ...`);
+    formData.contents = JSON.stringify(getQuillContent());
+    const createdData = useDataPage().create(formData);
+    if (createdData == null) {
+        alert("Désolé, une erreur s'est produite lors de votre demande. Si le problème persiste, vous pouvez contacter l'administrateur du site.");
+    }
     setCreatedIsSuccess(true);
 }
 </script>
@@ -125,7 +143,7 @@ const onSubmit = (): void => {
         <!-- Contents -->
         <div>
             <h4>Contenu *</h4>
-            <QuillEditor v-model="formData.contents" theme="snow" toolbar="full" placeholder="Ajoutez vos contenus ici" :readOnly="false" :magicPasteLinks="true" />
+            <QuillEditor ref="quillRef" theme="snow" toolbar="full" placeholder="Ajoutez vos contenus ici" :readOnly="false" :magicPasteLinks="true" />
         </div>
         <Button color="success" :disabled="!formIsValid || createdIsSuccess">
             <content-save-icon></content-save-icon>

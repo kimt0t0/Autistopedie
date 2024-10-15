@@ -15,8 +15,9 @@ Le code du site est sous licence open-source GNU-LGPL.
 <details>
 <summary>To-do Front-end</summary>
 
-- Handle add / remove categories to data page
-- Add page guard for pages not allowed to unauthentified users
+- Navbar: replace "je veux contribuer" by "ajouter du contenu" for auth users with corresponding roles
+- Fix summary and authors validation regex for datapage
+- Add page guard / redirect for pages not allowed to unauthentified users
 </details>
 
 <details>

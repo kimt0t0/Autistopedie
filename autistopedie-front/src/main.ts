@@ -26,6 +26,7 @@ import Account from 'vue-material-design-icons/Account.vue';
 import AccountOff from 'vue-material-design-icons/AccountOff.vue';
 import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
 import ChevronUp from 'vue-material-design-icons/ChevronUp.vue';
+import Close from 'vue-material-design-icons/Close.vue';
 import Cog from 'vue-material-design-icons/Cog.vue';
 import CogOff from 'vue-material-design-icons/CogOff.vue';
 import ContentSave from 'vue-material-design-icons/ContentSave.vue';
@@ -36,6 +37,7 @@ import EyeOff from 'vue-material-design-icons/EyeOff.vue';
 import Glasses from 'vue-material-design-icons/Glasses.vue';
 import Pencil from 'vue-material-design-icons/Pencil.vue';
 import Plus from 'vue-material-design-icons/Plus.vue';
+import IllustrationForm from './components/forms/IllustrationForm.vue';
 
 const app = createApp(App);
 
@@ -47,6 +49,7 @@ app.component('Button', Button)
     .component('Dropdown', Dropdown)
     .component('ErrorMessage', ErrorMessage)
     .component('HeroTitle', HeroTitle)
+    .component('IllustrationForm', IllustrationForm)
     .component('Gallery', Gallery)
     .component('SuccessMessage', SuccessMessage);
 
@@ -61,6 +64,7 @@ app.component('account-icon', Account)
     .component('account-off-icon', AccountOff)
     .component('chevron-down-icon', ChevronDown)
     .component('chevron-up-icon', ChevronUp)
+    .component('close-icon', Close)
     .component('cog-icon', Cog)
     .component('cog-off-icon', CogOff)
     .component('content-save-icon', ContentSave)

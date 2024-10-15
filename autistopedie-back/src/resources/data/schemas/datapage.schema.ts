@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 import { Illustration } from 'src/resources/illustration/schemas/illustration.schema';
 import { User } from 'src/resources/user/schemas/user.schema';
-import { Categorie } from '../enums/categorie.enum';
+import { Category } from '../enums/category.enum';
 
 @Schema({ timestamps: true })
 export class DataPage {
@@ -26,8 +26,8 @@ export class DataPage {
     @Prop({ length: 500, nullable: true })
     authors: string;
 
-    @Prop({ nullable: false, default: [Categorie.OTHER] })
-    categories: Categorie[];
+    @Prop({ nullable: false, default: [Category.OTHER] })
+    categories: Category[];
 
     @Prop({ type: mongoose.Schema.ObjectId, ref: 'Illustration' })
     illustration: Illustration;

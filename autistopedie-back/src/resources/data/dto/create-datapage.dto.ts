@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer';
 import { IsArray, IsObject, IsOptional, IsString, Length } from 'class-validator';
 import { ObjectId } from 'mongodb';
-import { Categorie } from '../enums/categorie.enum';
+import { Category } from '../enums/category.enum';
 
 export class CreateDataPageDto {
     @IsString()
@@ -31,7 +31,7 @@ export class CreateDataPageDto {
 
     @IsArray()
     @IsOptional()
-    categories: Categorie[];
+    categories: Category[];
 
     @IsString()
     @Length(24)

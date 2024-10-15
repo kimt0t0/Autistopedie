@@ -24,7 +24,7 @@ const router = createRouter({
             component: () => import('../views/DefinitionView.vue'),
         },
         {
-            path: '/page',
+            path: '/page/:id',
             name: 'data-page',
             component: () => import('../views/DataPageView.vue'),
         },

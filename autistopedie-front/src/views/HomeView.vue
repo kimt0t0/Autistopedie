@@ -1,10 +1,31 @@
 <script setup lang="ts">
+import Gallery from '@/components/global/Gallery.vue';
 import SearchBox from '@/components/global/SearchBox.vue';
-import { ref } from 'vue';
+import { useDataPage } from '@/composables/datapage.composable';
+import type { IDataPage } from '@/interfaces/IDataPage.interface';
+import { onBeforeMount, ref } from 'vue';
+
+const selectedPages = ref<IDataPage[]|void|undefined>();
+const allDataPages = ref<IDataPage[]|void|undefined>();
+
+onBeforeMount(async() => {
+    try {
+        allDataPages.value = await useDataPage().getAll();
+        if(!allDataPages) setIsError(true);
+        selectedPages.value = allDataPages.value;
+    } catch (e) {
+        console.error(`Data pages could not be loaded correctly`);
+    }
+})
 
 const isShowSearchBox = ref<boolean>(false);
 const toggleSearchBox = (): void => {
     isShowSearchBox.value = !isShowSearchBox.value;
+}
+
+const isError = ref<boolean>(false);
+const setIsError = (value: boolean):void => {
+    isError.value = value;
 }
 </script>
 
@@ -17,6 +38,7 @@ const toggleSearchBox = (): void => {
             <chevron-down-icon v-else></chevron-down-icon>
         </Button>
         <SearchBox v-if="isShowSearchBox" />
+        <Gallery :dataPages="selectedPages" />
     </div>
 </template>
 

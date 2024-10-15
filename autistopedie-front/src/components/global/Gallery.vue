@@ -2,12 +2,12 @@
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 
 defineProps<{
-    dataPages?: IDataPage[];
+    dataPages?: IDataPage[]|void;
 }>();
 </script>
 
 <template>
-    <div class="gallery-container">
-        <p v-for="(page, index) in dataPages" :key="index">{{ page.title }}</p>
+    <div class="horizontal-display gallery-container">
+        <Card v-for="(page, index) in dataPages" :key="index" :datapage="page" />
     </div>
 </template>

@@ -38,6 +38,7 @@ import Glasses from 'vue-material-design-icons/Glasses.vue';
 import Pencil from 'vue-material-design-icons/Pencil.vue';
 import Plus from 'vue-material-design-icons/Plus.vue';
 import IllustrationForm from './components/forms/IllustrationForm.vue';
+import Card from './components/global/Card.vue';
 
 const app = createApp(App);
 
@@ -46,6 +47,7 @@ app.use(router);
 
 // Global components
 app.component('Button', Button)
+    .component('Card', Card)
     .component('Dropdown', Dropdown)
     .component('ErrorMessage', ErrorMessage)
     .component('HeroTitle', HeroTitle)

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
+import { formatDateUtil } from '@/utils/formatting.util';
 import { computed, ref } from 'vue';
 
 const props = defineProps<{
@@ -9,20 +10,8 @@ const props = defineProps<{
 const createdAt = ref<Date | null>(props.datapage.createdAt ? new Date(props.datapage.createdAt) : null);
 const updatedAt = ref<Date | null>(props.datapage.updatedAt ? new Date(props.datapage.updatedAt) : null);
 
-const formatDate = (date: Date | null): string | null => {
-    if (!date) return null;
-
-    return new Intl.DateTimeFormat('fr-FR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    }).format(date);
-};
-
-const createdDateFormatted = computed(() => formatDate(createdAt.value));
-const updatedDateFormatted = computed(() => formatDate(updatedAt.value));
+const createdDateFormatted = computed(() => formatDateUtil(createdAt.value));
+const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
 </script>
 
 <template>
@@ -67,6 +56,9 @@ const updatedDateFormatted = computed(() => formatDate(updatedAt.value));
         left: 0;
         filter: grayscale(100%);
         @include transition();
+        @media (max-width: $bp-xs) {
+            min-height: 100%;
+        }
     }
     > .presentation {
         height: 100px;

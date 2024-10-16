@@ -20,6 +20,7 @@
     "jwt-decode": "^4.0.0",
     "pinia": "^2.1.7",
     "quill-blot-formatter": "^1.0.5",
+    "quill-delta-to-html": "^0.12.1",
     "quill-magic-url": "^4.2.0",
     "vue": "^3.4.29",
     "vue-material-design-icons": "^5.3.1",

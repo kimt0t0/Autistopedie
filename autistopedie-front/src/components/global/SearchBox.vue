@@ -40,19 +40,23 @@ import { computed, reactive } from 'vue';
         <div class="filter-container">
             <h3>Par titre / texte</h3>
         </div>
+        <p>Cette fonctionnalité est en attente de développement, veuillez nous excuser pour la gêne occasionnée.</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
+p {
+    margin: 0;
+}
 .searchbox {
     box-sizing: border-box;
     margin: $space-xs 0;
-    padding: 0 $space-m;
+    @include classicPadding();
     background-color: $primary;
     border: 3px solid $grey;
     border-radius: $radius-xxs;
     display: flex;
-    gap: $space-xl;
+    gap: $space-m $space-xl;
     flex-wrap: wrap;
     @media (max-width: $bp-m) {
         flex-direction: column;

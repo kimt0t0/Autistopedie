@@ -14,5 +14,5 @@ export interface IDataPage {
     illustration?: IIllustration;
     dataAuthor: IUserAccountData | undefined;
     createdAt?: Date;
-    updatedAd?: Date;
+    updatedAt?: Date;
 }

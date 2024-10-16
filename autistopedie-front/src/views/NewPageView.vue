@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NewDataForm from '@/components/forms/NewDataForm.vue';
+import DataForm from '@/components/forms/DataForm.vue';
 </script>
 
 <template>
@@ -7,7 +7,7 @@ import NewDataForm from '@/components/forms/NewDataForm.vue';
 
         <div class="classic-container">
             <HeroTitle>Création</HeroTitle>
-            <NewDataForm />
+            <DataForm />
         </div>
         
     </main>

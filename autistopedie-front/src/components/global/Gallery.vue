@@ -17,5 +17,9 @@ defineProps<{
     padding: $space-xl 0;
     gap: $space-l;
     flex-wrap: wrap;
+    @media (max-width: $bp-s) {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
 }
 </style>

@@ -53,8 +53,12 @@ const updatedDateFormatted = computed(() => formatDate(updatedAt.value));
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    @media (max-width: $bp-s) {
+        width: auto;
+    }
     > .cover-illustration {
         width: 100%;
+        min-height: 180px;
         position: absolute;
         z-index: 0;
         top: 0;

@@ -1,4 +1,5 @@
 import type { IDataPage } from "@/interfaces/IDataPage.interface";
+import type { ISecurityCheck } from "@/interfaces/ISecurityCheck.interface";
 import axiosInstance from "@/services/api.service";
 import type { UUID } from 'crypto';
 
@@ -43,11 +44,11 @@ export const updateDataPageUtil = async(id: UUID, formData: IDataPage): Promise<
 }
 
 // Delete
-export const deleteDataPageUtil = async(id: UUID): Promise<IDataPage | void> => {
+export const deleteDataPageUtil = async(id: UUID, credentials: ISecurityCheck): Promise<IDataPage | void> => {
     try {
-        const deletedPage = await axiosInstance.delete(`/datapages/${id}`);
+        const deletedPage = await axiosInstance.delete(`/datapages/${id}`, { data: credentials});
         return deletedPage.data;
     } catch (e) {
-        console.error(`Data page with id ${id} could not be loaded correctly: ${e}`);
+        console.error(`Data page with id ${id} could not be deleted correctly: ${e}`);
     }
 }

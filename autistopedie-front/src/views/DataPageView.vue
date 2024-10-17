@@ -6,13 +6,14 @@ import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil } from '@/utils/formatting.util';
 import defaultIllustation from '@images/default-illustration.jpg';
+import type { UUID } from 'crypto';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 // Get id from route params
 const route = useRoute();
-const dataId = route.params.id;
+const dataId: UUID = route.params.id;
 
 // Data storage references
 const datapage = ref<IDataPage | void>();
@@ -45,6 +46,12 @@ watch(
         }
     },
 );
+
+// Delete and return to homepage
+const isDeleteAction = ref<boolean>(false);
+const setIsDeleteAction = (value: boolean): void => {
+    isDeleteAction.value = value;
+}
 </script>
 
 <template>
@@ -53,8 +60,14 @@ watch(
             <Button type="button" color="secondary">
                 Éditer <pencil-icon></pencil-icon>
             </Button>
-            <Button type="button" color="alert">
+            <Button type="button" color="alert" @click="setIsDeleteAction(true)">
                 Supprimer <delete-icon></delete-icon>
+            </Button>
+        </div>
+        <div class="alerts" v-if="isDeleteAction">
+            <DeleteDataForm :dataId="dataId" />
+            <Button type="button" color="alert" @click="setIsDeleteAction(false)">
+                <close-icon></close-icon> Annuler
             </Button>
         </div>
         <div class="datapage-head" :style="{ backgroundImage: `url(${coverIllustrationPath})` }">
@@ -93,6 +106,10 @@ watch(
 
 .actions-container {
     position: fixed;
+    z-index: 1;
+    background-color: $grey;
+    padding: $space-s;
+    border-radius: $radius-xs;
     top: 220px;
     right: $space-l;
     display: flex;
@@ -105,5 +122,24 @@ watch(
 
 .datapage-contents {
     padding: $space-l 0;
+}
+
+.alerts {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > button {
+        position: absolute;
+        top: $space-xl;
+        right: $space-xl;
+    }
 }
 </style>

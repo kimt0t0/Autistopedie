@@ -1,4 +1,5 @@
 import type { IDataPage } from "@/interfaces/IDataPage.interface";
+import type { ISecurityCheck } from "@/interfaces/ISecurityCheck.interface";
 import { createDataPageUtil, deleteDataPageUtil, getAllDataPagesUtil, getDataPageUtil, updateDataPageUtil } from "@/utils/datapage.util";
 import type { UUID } from 'crypto';
 
@@ -43,9 +44,9 @@ export const useDataPage = () => {
         }
     }
 
-    const deletePage = async (id: UUID): Promise<IDataPage|void> => {
+    const deletePage = async (id: UUID, credentials: ISecurityCheck): Promise<IDataPage|void> => {
         try {
-            const deletedDatapage = await deleteDataPageUtil(id);
+            const deletedDatapage = await deleteDataPageUtil(id, credentials);
             if (!deletedDatapage) throw new Error(`Returned deleted datapage is empty.`);
             return deletedDatapage;
         }catch(e) {

@@ -88,6 +88,7 @@ const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
         }
     }
     > .summary {
+        width: 240px;
         position: absolute;
         z-index: 3;
         left: -240px;
@@ -96,6 +97,7 @@ const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
         background-color: $secondary;
         border-radius: $radius-xs;
         color: $light;
+        white-space: wrap;
         @include classicPadding;
         @include transition();
     }

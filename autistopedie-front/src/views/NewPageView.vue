@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import DataForm from '@/components/forms/DataForm.vue';
-</script>
-
 <template>
     <main>
 

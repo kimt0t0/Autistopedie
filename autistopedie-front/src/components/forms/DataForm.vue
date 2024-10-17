@@ -9,8 +9,16 @@ import type { Delta, QuillEditor } from '@vueup/vue-quill';
 import { computed, onBeforeMount, reactive, ref } from 'vue';
 import SuccessMessage from '../global/SuccessMessage.vue';
 
+// Get existing data from page if edit mode
+const props = defineProps<{
+    datapage?: IDataPage;
+}>();
+
 // Load logged in user
 const user = ref<IUserAccountData>();
+
+// To get the id if new page
+const createdPage = ref<IDataPage|void>();
 
 onBeforeMount(async () => {
     user.value = await useAuth().getUserAuth();
@@ -18,11 +26,11 @@ onBeforeMount(async () => {
 
 // Reactive handling of form data
 const formData = reactive<IDataPage>({
-    title: "",
-    authors: "",
-    categories: [],
-    contents: undefined,
-    dataAuthor: user.value
+    title: props.datapage ? props.datapage.title : "",
+    authors: props.datapage ? props.datapage.authors : "",
+    categories: props.datapage ? props.datapage.categories : [],
+    contents: props.datapage ? props.datapage.contents : null,
+    dataAuthor: props.datapage ? props.datapage.dataAuthor : user.value
 });
 
 // Handle categories selection
@@ -63,19 +71,37 @@ const setCreatedIsSuccess = (value: boolean): void => {
     createdIsSuccess.value = value;
 }
 
+// Check if update worked
+const updatedIsSuccess = ref<boolean>(false);
+const setUpdatedIsSuccess = (value: boolean): void => {
+    updatedIsSuccess.value = value;
+}
+
 // Handle cover illustration
 const isAddIllustration = ref<boolean>(false);
 const setIsAddIllustration = (value: boolean) :void => {
     isAddIllustration.value = value;
 }
 // Submit form
-const onSubmit = (): void => {
-    formData.contents = JSON.stringify(getQuillContent());
-    const createdData = useDataPage().create(formData);
-    if (createdData == null) {
-        alert("Désolé, une erreur s'est produite lors de votre demande. Si le problème persiste, vous pouvez contacter l'administrateur du site.");
+const onSubmit = async (): Promise<void> => {
+    try {
+        formData.contents = JSON.stringify(getQuillContent());
+        if (props.datapage) {
+            const updatedData = await useDataPage().update(props.datapage._id, formData);
+            if (updatedData == null) {
+                throw new Error("Returned updated datapage is null.")
+            }
+            setUpdatedIsSuccess(true);
+        } else {
+            createdPage.value = await useDataPage().create(formData);
+            if (!createdPage.value) {
+                throw new Error("Returned created datapage is null.")
+            }
+            setCreatedIsSuccess(true);
+        }
+    } catch (e) {
+        console.error(`There was a mistake treating your request on datapage due to error: ${e}`);
     }
-    setCreatedIsSuccess(true);
 }
 </script>
 <template>
@@ -151,8 +177,12 @@ const onSubmit = (): void => {
         </Button>
     </form>
     <SuccessMessage v-if="createdIsSuccess" title="Votre nouvelle page a bien été créée !">
-        <RouterLink to="/page" class="button-styled-link secondary">Voir la page éditable</RouterLink>
+        <RouterLink :to="'/page/' + createdPage?._id" class="button-styled-link secondary">Voir la page</RouterLink>
         <Button color="shadows" @click="setIsAddIllustration(true)">Ajouter une image de couverture</Button>
+    </SuccessMessage>
+    <SuccessMessage v-if="updatedIsSuccess" title="La page a bien été mise à jour !">
+        <RouterLink :to="'/page/' + datapage?._id" class="button-styled-link secondary">Voir la page</RouterLink>
+        <RouterLink to="/" class="button-styled-link">Revenir à l'accueil</RouterLink>
     </SuccessMessage>
     <div v-if="isAddIllustration" class="illustration-form-container">
         <Button size="small" color="alert" @click="setIsAddIllustration(false)">

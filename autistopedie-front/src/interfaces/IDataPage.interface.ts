@@ -8,7 +8,7 @@ export interface IDataPage {
     _id?: UUID; 
     title: string;
     summary?: string;
-    contents?: Delta | string | undefined;
+    contents?: Delta | string | null;
     authors?: string;
     categories: Category[];
     illustration?: IIllustration;

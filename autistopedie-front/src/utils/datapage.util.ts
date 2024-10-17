@@ -36,7 +36,7 @@ export const createDataPageUtil = async(formData: IDataPage): Promise<IDataPage 
 // Patch
 export const updateDataPageUtil = async(id: UUID, formData: IDataPage): Promise<IDataPage | void> => {
     try {
-        const updatedPage = await axiosInstance.post(`/datapages/${id}`, formData);
+        const updatedPage = await axiosInstance.patch(`/datapages/${id}`, formData);
         return updatedPage.data;
     } catch (e) {
         console.error(`Data page with id ${id} could not be saved in the database: ${e}`)

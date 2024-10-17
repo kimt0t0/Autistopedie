@@ -38,6 +38,7 @@ import EyeOff from 'vue-material-design-icons/EyeOff.vue';
 import Glasses from 'vue-material-design-icons/Glasses.vue';
 import Pencil from 'vue-material-design-icons/Pencil.vue';
 import Plus from 'vue-material-design-icons/Plus.vue';
+import DataForm from './components/forms/DataForm.vue';
 import DeleteDataForm from './components/forms/DeleteDataForm.vue';
 import IllustrationForm from './components/forms/IllustrationForm.vue';
 import Card from './components/global/Card.vue';
@@ -50,6 +51,7 @@ app.use(router);
 // Global components
 app.component('Button', Button)
     .component('Card', Card)
+    .component('DataForm', DataForm)
     .component('Dropdown', Dropdown)
     .component('ErrorMessage', ErrorMessage)
     .component('HeroTitle', HeroTitle)

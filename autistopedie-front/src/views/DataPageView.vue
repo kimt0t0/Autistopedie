@@ -4,12 +4,15 @@ import { useDataPage } from '@/composables/datapage.composable';
 import { Role } from '@/enums/Role.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
-import { formatDateUtil } from '@/utils/formatting.util';
+import { formatDateUtil, formatImageUrlUtil } from '@/utils/formatting.util';
 import defaultIllustation from '@images/default-illustration.jpg';
 import type { UUID } from 'crypto';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+
+// API URL
+const apiUrl: string = import.meta.env.VITE_API_URL;
 
 // Get id from route params
 const route = useRoute();
@@ -32,7 +35,7 @@ onBeforeMount(async () => {
         htmlContents.value = converter.convert();
     }
     if (datapage.value?.illustration) {
-        coverIllustrationPath.value = datapage.value.illustration.filepath;
+        coverIllustrationPath.value = apiUrl + '/' + formatImageUrlUtil(datapage.value.illustration.filepath);
     }
 });
 

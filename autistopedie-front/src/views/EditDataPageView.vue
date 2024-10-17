@@ -57,7 +57,7 @@ import { useRoute } from 'vue-router';
     <div class="classic-container">
         <HeroTitle color="primary">Mode édition</HeroTitle>
         <Dropdown title="Illustration de couverture" color="grey">
-            <IllustrationForm v-if="datapage?._id" :dataId="datapage?._id" :isEdit="true" :illustrationPath="datapage?.illustration ? datapage.illustration : null" />
+            <IllustrationForm v-if="datapage?._id" :dataId="datapage?._id" :isEdit="true" :illustration="datapage?.illustration ? datapage.illustration : null" />
         </Dropdown>
     </div>
 </template>

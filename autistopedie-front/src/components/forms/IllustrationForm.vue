@@ -2,10 +2,14 @@
 import { useIllustration } from '@/composables/illustration.composable';
 import type { IIllustration } from '@/interfaces/IIllustration.interface';
 import type { INewIllustration } from '@/interfaces/INewIllustration.interface';
+import { formatImageUrlUtil } from '@/utils/formatting.util';
 import defaultIllustration from '@images/default-illustration.jpg';
 import type { UUID } from 'crypto';
 import { computed, reactive, ref } from 'vue';
 import SuccessMessage from '../global/SuccessMessage.vue';
+
+// API URL
+const apiUrl: string = import.meta.env.VITE_API_URL;
 
 // get data page id from parent component
 const props = defineProps<{
@@ -15,7 +19,7 @@ const props = defineProps<{
 }>();
 
 // current illustration
-const previewIllustration = ref<string>(props.illustration ? props.illustration.filepath : defaultIllustration);
+const previewIllustration = ref<string>(props.illustration ? apiUrl + '/' + formatImageUrlUtil(props.illustration.filepath) : defaultIllustration);
 
 // reactive form data
 const formData = reactive<INewIllustration>({
@@ -32,7 +36,7 @@ const onFileChange = (event: Event): void => {
 };
 
 const resetFile = (): void => {
-    previewIllustration.value = props.illustration ? props.illustration.filepath : defaultIllustration;
+    previewIllustration.value = props.illustration ? apiUrl + '/' + formatImageUrlUtil(props.illustration.filepath) : defaultIllustration;
     formData.illustration = null;
 };
 
@@ -79,9 +83,8 @@ const onDelete = async () => {
     try {
         const deletedIllustration = await useIllustration().deleteIllustration(props.illustration?._id);
         if (!deletedIllustration) throw new Error('Deleted illustration returned is empty.');
-        setDeletedIsSuccess(true);
-        setTimeout(() => setDeletedIsSuccess(false), 3000);
         previewIllustration.value = defaultIllustration;
+        setDeletedIsSuccess(true);
     } catch (e) {
         console.error(`Illustration could not be deleted due to error: ${e}`);
         setDeletedIsError(true);

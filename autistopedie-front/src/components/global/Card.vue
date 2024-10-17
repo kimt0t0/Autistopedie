@@ -1,14 +1,25 @@
 <script lang="ts" setup>
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
-import { formatDateUtil } from '@/utils/formatting.util';
+import { formatDateUtil, formatImageUrlUtil } from '@/utils/formatting.util';
+import defaultIllustration from '@images/default-illustration.jpg';
 import { computed, ref } from 'vue';
 
+// API URL
+const apiUrl: string = import.meta.env.VITE_API_URL;
+
+// Get datapage from page
 const props = defineProps<{
     datapage: IDataPage
 }>();
 
+// Format datapage data to display
 const createdAt = ref<Date | null>(props.datapage.createdAt ? new Date(props.datapage.createdAt) : null);
 const updatedAt = ref<Date | null>(props.datapage.updatedAt ? new Date(props.datapage.updatedAt) : null);
+const illustrationPath = ref<string>(
+    props.datapage.illustration?.filepath ? 
+    apiUrl + '/' + formatImageUrlUtil(props.datapage.illustration.filepath)
+    : defaultIllustration
+)
 
 const createdDateFormatted = computed(() => formatDateUtil(createdAt.value));
 const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
@@ -17,8 +28,7 @@ const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
 <template>
     <RouterLink :to="'/page/' + datapage._id">
     <div class="card">
-        <img v-if="datapage.illustration?.filepath" :src="datapage.illustration?.filepath" :alt="'Cover illustration of ' + datapage.title" class="cover-illustration" />
-        <img v-else src="@images/default-illustration.jpg" alt="Cover default illustration with the words: Accept Understand Empower" class="cover-illustration" />
+        <img :src="illustrationPath" :alt="'Cover illustration of ' + datapage.title" class="cover-illustration" crossorigin="anonymous" />
         <div class="presentation">
             <h3>{{ datapage.title }}</h3>
             <p><strong>Ajouté par:</strong> {{ datapage.dataAuthor?.username }}</p>

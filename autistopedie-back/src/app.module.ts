@@ -23,8 +23,13 @@ import { UserModule } from './resources/user/user.module';
             cache: true,
         }),
         ServeStaticModule.forRoot({
-            rootPath: join(__dirname, '../'),
-            renderPath: '/public/data-illustrations',
+            rootPath: join(__dirname, '..', 'public/data-illustrations'),
+            serveRoot: '/public/data-illustrations',
+            serveStaticOptions: {
+                setHeaders: (res, path, stat) => {
+                    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+                },
+            },
         }),
         MongooseModule.forRoot(process.env.DB_URL, {
             dbName: process.env.DB_NAME,

@@ -9,3 +9,7 @@ export const formatDateUtil = (date: Date | null): string | null => {
         minute: '2-digit'
     }).format(date);
 };
+
+export const formatImageUrlUtil = (filepath: string): string => {
+    return filepath.replace(/\\/g, '/');
+}

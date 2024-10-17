@@ -133,8 +133,4 @@ form {
         }
     }
 }
-
-.alert-message {
-    @include alertStyling();
-}
 </style>

@@ -1,4 +1,5 @@
 import type { IIllustration } from "@/interfaces/IIllustration.interface";
+import type { INewIllustration } from "@/interfaces/INewIllustration.interface";
 import { createIllustrationUtil, deleteIllustrationUtil, getAllIllustrationsUtil, getIllustrationUtil } from "@/utils/illustration.util";
 import type { UUID } from 'crypto';
 
@@ -23,7 +24,7 @@ export const useIllustration = () => {
         }
     }
 
-    const create = async (formData: IIllustration): Promise<IIllustration|void> => {
+    const create = async (formData: INewIllustration): Promise<IIllustration|void> => {
         try {
             const createdIllustration = await createIllustrationUtil(formData);
             if (!createdIllustration) throw new Error(`Returned illustration is empty.`);

@@ -117,6 +117,10 @@ a {
     text-decoration: none;
 }
 
+.alert-message {
+    @include alertStyling();
+}
+
 // Forms
 form {
     box-sizing: border-box;

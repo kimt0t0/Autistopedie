@@ -37,6 +37,11 @@ const router = createRouter({
             path: '/creation',
             name: 'creation',
             component: () => import('../views/NewPageView.vue'),
+        },
+        {
+            path: '/edition/:id',
+            name: 'edition',
+            component: () => import('../views/EditDataPageView.vue')
         }
     ],
 });

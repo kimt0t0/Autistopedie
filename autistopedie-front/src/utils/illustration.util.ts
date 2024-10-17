@@ -1,4 +1,5 @@
 import type { IIllustration } from "@/interfaces/IIllustration.interface";
+import type { INewIllustration } from "@/interfaces/INewIllustration.interface";
 import axiosInstance from "@/services/api.service";
 import type { UUID } from 'crypto';
 
@@ -23,9 +24,11 @@ export const getIllustrationUtil = async(id: UUID): Promise<IIllustration | void
 }
 
 // Post 
-export const createIllustrationUtil = async(formData: IIllustration): Promise<IIllustration | void> => {
+export const createIllustrationUtil = async(formData: INewIllustration): Promise<IIllustration | void> => {
     try {
-        const createdIllustration = await axiosInstance.post('/illustrations', formData);
+        const createdIllustration = await axiosInstance.post('/illustrations', formData, {headers: {
+        'Content-Type': 'multipart/form-data',
+    },});
         return createdIllustration.data;
     } catch (e) {
         console.error(`New illustration could not be saved in the database: ${e}`)

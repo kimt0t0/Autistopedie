@@ -57,11 +57,11 @@ const setIsDeleteAction = (value: boolean): void => {
 <template>
     <section class="classic-container">
         <div class="actions-container" v-if="useAuthStore().decodedToken?.role == (Role.ADMIN || Role.CONTRIBUTOR)">
-            <Button type="button" color="secondary">
-                Éditer <pencil-icon></pencil-icon>
-            </Button>
+            <RouterLink :to="'/edition/' + dataId" class="button-styled-link secondary">
+                <pencil-icon></pencil-icon> Éditer
+            </RouterLink>
             <Button type="button" color="alert" @click="setIsDeleteAction(true)">
-                Supprimer <delete-icon></delete-icon>
+                <delete-icon></delete-icon> Supprimer
             </Button>
         </div>
         <div class="alerts" v-if="isDeleteAction">
@@ -97,7 +97,7 @@ const setIsDeleteAction = (value: boolean): void => {
     background-position: center;
     background-clip: border-box;
     border-radius: $radius-xxs;
-    box-shadow: 1px 1px 5px 1px $shadows;
+    @include classicShadow();
     >p {
         margin: 0;
         position: relative;
@@ -115,8 +115,19 @@ const setIsDeleteAction = (value: boolean): void => {
     display: flex;
     flex-direction: column;
     gap: $space-m;
-    > button {
+    > .button-styled-link {
+        @include buttonStyle();
+        color: $secondary;
+        border-color: $secondary;
+        &:hover {
+            background-color: $secondary;
+        }
+    }
+    > button, a {
         width: 160px;
+        &:hover {
+            color: $grey;
+        }
     }
 }
 

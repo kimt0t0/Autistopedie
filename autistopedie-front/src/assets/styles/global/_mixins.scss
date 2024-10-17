@@ -3,7 +3,11 @@
 }
 
 @mixin classicPadding() {
-    padding: $space-s $space-m;
+    padding: $space-m;
+}
+
+@mixin classicShadow() {
+    box-shadow: 1px 1px 5px 1px $shadows;
 }
 
 @mixin buttonStyle() {

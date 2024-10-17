@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import HeroTitle from '@/components/global/HeroTitle.vue';
 import { useDataPage } from '@/composables/datapage.composable';
+import { Role } from '@/enums/Role.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
+import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil } from '@/utils/formatting.util';
+import defaultIllustation from '@images/default-illustration.jpg';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -11,10 +14,13 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const dataId = route.params.id;
 
+// Data storage references
 const datapage = ref<IDataPage | void>();
 const createdDateFormatted = ref<string|null>();
 const updatedDateFormatted = ref<string|null>();
 const htmlContents = ref<string|null>();
+// Cover illustration
+const coverIllustrationPath = ref<string>(defaultIllustation);
 
 // Load data from api
 onBeforeMount(async () => {
@@ -23,6 +29,9 @@ onBeforeMount(async () => {
         const parsedContents = JSON.parse(datapage.value.contents);
         const converter = new QuillDeltaToHtmlConverter(parsedContents.ops);
         htmlContents.value = converter.convert();
+    }
+    if (datapage.value?.illustration) {
+        coverIllustrationPath.value = datapage.value.illustration.filepath;
     }
 });
 
@@ -40,12 +49,15 @@ watch(
 
 <template>
     <section class="classic-container">
-        <Button type="button" color="secondary">
-            Éditer <pencil-icon></pencil-icon>
-        </Button>
-        <div class="datapage-head">
-            <img v-if="datapage.illustration?.filepath" :src="datapage.illustration?.filepath" :alt="'Cover illustration of ' + datapage.title" class="cover-illustration" />
-            <img v-else src="@images/default-illustration.jpg" alt="Cover default illustration with the words: Accept Understand Empower" class="cover-illustration" />
+        <div class="actions-container" v-if="useAuthStore().decodedToken?.role == (Role.ADMIN || Role.CONTRIBUTOR)">
+            <Button type="button" color="secondary">
+                Éditer <pencil-icon></pencil-icon>
+            </Button>
+            <Button type="button" color="alert">
+                Supprimer <delete-icon></delete-icon>
+            </Button>
+        </div>
+        <div class="datapage-head" :style="{ backgroundImage: `url(${coverIllustrationPath})` }">
             <HeroTitle color="grey">{{ datapage?.title }}</HeroTitle>
             <p><strong>Ajouté par:</strong> {{ datapage?.dataAuthor?.username }}</p>
             <p><strong>Auteur.ice.s de la fiction:</strong> {{ datapage?.authors }}</p>
@@ -66,26 +78,29 @@ watch(
     display: flex;
     flex-direction: column;
     gap: $space-xs;
-    padding: $space-m $space-s;
+    padding: $space-xl $space-l $space-xxl;
     position: relative;
+    background-size: cover;
+    background-position: center;
+    background-clip: border-box;
+    border-radius: $radius-xxs;
+    box-shadow: 1px 1px 5px 1px $shadows;
     >p {
         margin: 0;
         position: relative;
     }
-    > .cover-illustration {
-        position: absolute;
-        z-index: 0;
-        width: 100vw;
-        top: 0;
-        right: 0;
-        left: 0;
-    }
 }
 
-button {
+.actions-container {
     position: fixed;
     top: 220px;
-    right: $space-xl;
+    right: $space-l;
+    display: flex;
+    flex-direction: column;
+    gap: $space-m;
+    > button {
+        width: 160px;
+    }
 }
 
 .datapage-contents {

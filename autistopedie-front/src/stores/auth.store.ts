@@ -1,19 +1,24 @@
+import type { IDecodedToken } from "@/interfaces/IDecodedToken.interface";
+import { jwtDecode } from 'jwt-decode';
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useAuthStore = defineStore('auth', () => {
     // Authentification state
     const userAuth = ref<string | null>();
+    const decodedToken = ref<IDecodedToken|null>();
     
     const setAuth = (access_token: string): void => {
         localStorage.clear();
         localStorage.setItem('authenticatedUser', access_token);
         userAuth.value = localStorage.getItem('authenticatedUser');
+        decodedToken.value = jwtDecode<IDecodedToken>(access_token);
     };
 
     const resetAuth = (): void => {
         localStorage.clear();
         userAuth.value = null;
+        decodedToken.value = null;
     };
     const ownsAccount = ref<boolean>(true);
 
@@ -27,6 +32,7 @@ export const useAuthStore = defineStore('auth', () => {
         setOwnsAccount,
         // user when auth
         userAuth,
+        decodedToken,
         // login / disconnect functions
         setAuth,
         resetAuth,

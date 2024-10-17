@@ -30,6 +30,7 @@ import Close from 'vue-material-design-icons/Close.vue';
 import Cog from 'vue-material-design-icons/Cog.vue';
 import CogOff from 'vue-material-design-icons/CogOff.vue';
 import ContentSave from 'vue-material-design-icons/ContentSave.vue';
+import Delete from 'vue-material-design-icons/Delete.vue';
 import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
@@ -70,6 +71,7 @@ app.component('account-icon', Account)
     .component('cog-icon', Cog)
     .component('cog-off-icon', CogOff)
     .component('content-save-icon', ContentSave)
+    .component('delete-icon', Delete)
     .component('door-closed-cancel-icon', DoorClosedCancel)
     .component('dots-vertical-icon', DotsVertical)
     .component('eye-icon', Eye)

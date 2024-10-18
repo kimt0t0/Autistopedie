@@ -17,11 +17,26 @@ const props = defineProps<{
 // Load logged in user
 const user = ref<IUserAccountData>();
 
+// Quill editor reference
+const quillRef = ref<InstanceType<typeof QuillEditor> | null>(null);
+
+// Quill editor options
+const editorOptions: object = {
+    modules: {
+        magicUrl: true,
+        blotFormatter: {}
+    },
+    placeholder: "Ajoutez vos contenus ici"
+};
+
 // To get the id if new page
 const createdPage = ref<IDataPage|void>();
 
 onBeforeMount(async () => {
     user.value = await useAuth().getUserAuth();
+    if (quillRef.value && props.datapage?.contents) {
+        quillRef.value.setContents(JSON.parse(props.datapage.contents.toString()));
+    }
 });
 
 // Reactive handling of form data
@@ -53,9 +68,6 @@ const formIsValid = computed((): boolean => {
         && categoriesValidator(formData.categories).isValid
     );
 });
-
-// Quill editor reference
-const quillRef = ref<InstanceType<typeof QuillEditor> | null>(null);
 
 // Get Quill content as HTML
 const getQuillContent = (): Delta | string | undefined => {
@@ -169,12 +181,17 @@ const onSubmit = async (): Promise<void> => {
         <!-- Contents -->
         <div>
             <h4>Contenu *</h4>
-            <QuillEditor ref="quillRef" theme="snow" toolbar="full" placeholder="Ajoutez vos contenus ici" :readOnly="false" :magicPasteLinks="true" />
+            <QuillEditor ref="quillRef" toolbar="full" :options="editorOptions" />
         </div>
-        <Button color="success" :disabled="!formIsValid || createdIsSuccess">
-            <content-save-icon></content-save-icon>
-            Enregistrer
-        </Button>
+        <div class="horizontal-display">
+            <Button color="success" :disabled="!formIsValid || createdIsSuccess">
+                <content-save-icon></content-save-icon>
+                Enregistrer
+            </Button>
+            <RouterLink :to="props.datapage ? ('/page/' + props.datapage?._id) : '/mon-compte'" class="button-styled-link  alert">
+                <close-icon></close-icon> Annuler
+            </RouterLink>
+        </div>
     </form>
     <SuccessMessage v-if="createdIsSuccess" title="Votre nouvelle page a bien été créée !">
         <RouterLink :to="'/page/' + createdPage?._id" class="button-styled-link secondary">Voir la page</RouterLink>
@@ -214,6 +231,14 @@ const onSubmit = async (): Promise<void> => {
         border-color: $secondary;
         &:hover {
             background-color: $secondary;
+            color: $light;
+        }
+    }
+    &.alert {
+        color: $alert;
+        border-color: $alert;
+        &:hover {
+            background-color: $alert;
             color: $light;
         }
     }

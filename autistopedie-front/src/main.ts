@@ -64,7 +64,7 @@ app.component('Button', Button)
 app.component('QuillEditor', QuillEditor);
 // detects emails and URLs in the editor and automatically converts to link
 Quill.register('modules/magicUrl', MagicUrl);
-Quill.register('modules/blotFormatter', BlotFormatter)
+Quill.register('modules/blotFormatter', BlotFormatter);
 
 // Icons from Vue Material Icons
 app.component('account-icon', Account)

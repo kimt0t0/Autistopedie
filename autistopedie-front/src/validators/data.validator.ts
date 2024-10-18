@@ -8,7 +8,7 @@ export const titleValidator = (input: string): IValidation => {
             errorMessage: 'Titre invalide: 3 caractères minimum.'
         }
     }
-    const re = /^[A-Za-z0-9\s]{3,255}$/;
+    const re = /^[\wÀ-ú,;:.?!_\s'"-]{3,255}$/;
     return {
         isValid: re.test(input),
         errorMessage:
@@ -17,7 +17,7 @@ export const titleValidator = (input: string): IValidation => {
 }
 
 export const summaryValidator = (input: string): IValidation => {
-    const re = /^[A-Za-z0-9\s]{0,500}$/;
+    const re = /^[\wÀ-ú,;:.?!_\s'"-]{0,500}$/;
     return {
         isValid: re.test(input),
         errorMessage:
@@ -26,7 +26,7 @@ export const summaryValidator = (input: string): IValidation => {
 }
 
 export const authorsValidator = (input: string): IValidation => {
-    const re = /^[A-Za-z0-9\s]{0,500}$/;
+    const re = /^[\wÀ-ú,;:.?!_\s'"-]{0,500}$/;
     return {
         isValid: re.test(input),
         errorMessage:

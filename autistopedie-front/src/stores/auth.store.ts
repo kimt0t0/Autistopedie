@@ -7,6 +7,14 @@ export const useAuthStore = defineStore('auth', () => {
     // Authentification state
     const userAuth = ref<string | null>();
     const decodedToken = ref<IDecodedToken|null>();
+
+    const getAuth = (): void => {
+        userAuth.value = localStorage.getItem('authenticatedUser');
+        if (userAuth.value != null) {
+            const access_token = JSON.parse(userAuth.value).access_token;
+            decodedToken.value = jwtDecode<IDecodedToken>(access_token);
+        }
+    }
     
     const setAuth = (access_token: string): void => {
         localStorage.clear();
@@ -34,6 +42,7 @@ export const useAuthStore = defineStore('auth', () => {
         userAuth,
         decodedToken,
         // login / disconnect functions
+        getAuth,
         setAuth,
         resetAuth,
     }

@@ -24,7 +24,7 @@ export class User {
     @Prop({ default: Role.READER }) // wait for admin action to validate and turn into contributor
     role: Role;
 
-    @Prop({ type: mongoose.Schema.ObjectId, ref: 'Data' })
+    @Prop({ type: mongoose.Schema.ObjectId, ref: 'DataPage' })
     addedData: DataPage[];
 }
 

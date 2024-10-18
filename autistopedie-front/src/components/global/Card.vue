@@ -35,7 +35,7 @@ const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
             <p v-if="createdDateFormatted"><strong>Le:</strong> {{ createdDateFormatted }}</p>
             <p v-if="updatedDateFormatted"><strong>Modifié le:</strong> {{ updatedDateFormatted }}</p>
         </div>
-        <p v-if="datapage.summary && datapage.summary.length > 0" class="summary">{{ datapage.summary }}</p>
+        <p v-if="datapage.summary && datapage.summary.length > 0" class="summary"><div :class="'summary-content ' + (datapage.summary.length > 120 ? 'scroller':'' )">{{ datapage.summary }}</div></p>
     </div>
     </RouterLink>
 </template>
@@ -98,6 +98,7 @@ const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
         border-radius: $radius-xs;
         color: $light;
         white-space: wrap;
+        overflow: hidden;
         @include classicPadding;
         @include transition();
     }
@@ -117,8 +118,24 @@ a {
             }
             > .summary {
                 transform: translateX(230px);
+                > .summary-content.scroller {
+                    animation: scroller;
+                    animation-duration: 4s;
+                    animation-delay: 0;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: ease-in-out;
+                }
             }
         }
+    }
+}
+
+@keyframes scroller {
+    10% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-80px);
     }
 }
 </style>

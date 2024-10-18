@@ -1,4 +1,4 @@
-import type { Role } from "@/enums/Role.enum";
+import type { Role } from "@/enums/Role.enum.js";
 
 export default interface ISignupData {
     username: string;

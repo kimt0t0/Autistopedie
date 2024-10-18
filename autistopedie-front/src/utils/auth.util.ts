@@ -1,8 +1,8 @@
-import type { IJwtToken } from "@/interfaces/IJwtToken.interface";
-import type ILoginData from "@/interfaces/ILoginData.interface";
-import type ISignupData from "@/interfaces/ISignupData.interface";
-import type { IUserAuthData } from "@/interfaces/IUserAuthData.interface";
-import axiosInstance from "@/services/api.service";
+import type { IJwtToken } from "@/interfaces/IJwtToken.interface.js";
+import type ILoginData from "@/interfaces/ILoginData.interface.js";
+import type ISignupData from "@/interfaces/ISignupData.interface.js";
+import type { IUserAuthData } from "@/interfaces/IUserAuthData.interface.js";
+import axiosInstance from "@/services/api.service.js";
 import { jwtDecode } from "jwt-decode";
 
 // Login

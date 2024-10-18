@@ -1,4 +1,4 @@
-import type { Category } from '@/enums/Category.enum';
+import type { Category } from '@/enums/Category.enum.js';
 import type { Delta } from '@vueup/vue-quill';
 
 export interface IEditDataPage {

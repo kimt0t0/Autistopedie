@@ -1,4 +1,4 @@
-import type { IDecodedToken } from "@/interfaces/IDecodedToken.interface";
+import type { IDecodedToken } from "@/interfaces/IDecodedToken.interface.js";
 import { jwtDecode } from 'jwt-decode';
 import { defineStore } from "pinia";
 import { ref } from "vue";

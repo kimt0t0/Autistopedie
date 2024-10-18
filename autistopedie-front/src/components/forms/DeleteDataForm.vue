@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 import { useDataPage } from '@/composables/datapage.composable';
-import { ISecurityCheck } from '@/interfaces/ISecurityCheck.interface';
+import type { ISecurityCheck } from '@/interfaces/ISecurityCheck.interface';
 import router from '@/router';
 import { emailValidator, passwordValidator } from '@/validators/auth.validator';
-import type { UUID } from 'crypto';
 import { computed, reactive, ref } from 'vue';
 
 // Get id from parent component
 const props = defineProps<{
-    dataId: UUID;
+    dataId: string;
 }>();
 
 // Check if deletion worked

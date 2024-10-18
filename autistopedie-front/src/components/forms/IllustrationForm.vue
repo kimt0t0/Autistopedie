@@ -4,7 +4,6 @@ import type { IIllustration } from '@/interfaces/IIllustration.interface';
 import type { INewIllustration } from '@/interfaces/INewIllustration.interface';
 import { formatImageUrlUtil } from '@/utils/formatting.util';
 import defaultIllustration from '@images/default-illustration.jpg';
-import type { UUID } from 'crypto';
 import { computed, reactive, ref } from 'vue';
 import SuccessMessage from '../global/SuccessMessage.vue';
 
@@ -13,7 +12,7 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 
 // get data page id from parent component
 const props = defineProps<{
-    dataId: UUID;
+    dataId: string;
     illustration?: IIllustration;
     isEdit?: boolean; // use true for edit mode
 }>();

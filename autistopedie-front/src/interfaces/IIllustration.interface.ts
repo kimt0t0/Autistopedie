@@ -1,8 +1,7 @@
-import type { UUID } from 'crypto';
-import type { IDataPage } from './IDataPage.interface';
+import type { IDataPage } from './IDataPage.interface.js';
 
 export interface IIllustration {
-    _id: UUID; 
+    _id: string; 
     filename: string;
     filepath: string;
     dataIllustrated: IDataPage;

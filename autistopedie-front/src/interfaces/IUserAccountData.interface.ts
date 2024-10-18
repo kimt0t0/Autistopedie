@@ -1,5 +1,5 @@
-import type { Role } from "@/enums/Role.enum";
-import type { IDataPage } from "./IDataPage.interface";
+import type { Role } from "@/enums/Role.enum.js";
+import type { IDataPage } from "./IDataPage.interface.js";
 
 export interface IUserAccountData {
     username: string;

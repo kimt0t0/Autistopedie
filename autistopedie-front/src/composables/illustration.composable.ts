@@ -1,7 +1,6 @@
-import type { IIllustration } from "@/interfaces/IIllustration.interface";
-import type { INewIllustration } from "@/interfaces/INewIllustration.interface";
-import { createIllustrationUtil, deleteIllustrationUtil, getAllIllustrationsUtil, getIllustrationUtil } from "@/utils/illustration.util";
-import type { UUID } from 'crypto';
+import type { IIllustration } from "@/interfaces/IIllustration.interface.js";
+import type { INewIllustration } from "@/interfaces/INewIllustration.interface.js";
+import { createIllustrationUtil, deleteIllustrationUtil, getAllIllustrationsUtil, getIllustrationUtil } from "@/utils/illustration.util.js";
 
 export const useIllustration = () => {
     const getAll = async (): Promise<IIllustration[] | void> => {
@@ -14,7 +13,7 @@ export const useIllustration = () => {
         }
     }
 
-    const getOne = async (id: UUID): Promise<IIllustration|void> => {
+    const getOne = async (id: string): Promise<IIllustration|void> => {
         try {
             const illustration = await getIllustrationUtil(id);
             if (!illustration) throw new Error(`Illustration is empty.`);
@@ -34,7 +33,7 @@ export const useIllustration = () => {
         }
     }
 
-    const deleteIllustration = async (id: UUID): Promise<IIllustration|void> => {
+    const deleteIllustration = async (id: string): Promise<IIllustration|void> => {
         try {
             const deletedIllustration = await deleteIllustrationUtil(id);
             if (!deletedIllustration) throw new Error(`Returned deleted illustration is empty.`);

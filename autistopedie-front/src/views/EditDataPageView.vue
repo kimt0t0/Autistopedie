@@ -5,13 +5,12 @@ import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil } from '@/utils/formatting.util';
 import defaultIllustration from '@images/default-illustration.jpg';
-import type { UUID } from 'crypto';
 import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 // Get id from route params
 const route = useRoute();
-const dataId: UUID = route.params.id;
+const dataId: string = route.params.id.toString();
 
 // Data storage references
 const datapage = ref<IDataPage | void>();

@@ -1,6 +1,6 @@
-import { Role } from '@/enums/Role.enum';
-import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
-import type { IValidation } from '@/interfaces/IValidation.interface';
+import { Role } from '@/enums/Role.enum.js';
+import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface.js';
+import type { IValidation } from '@/interfaces/IValidation.interface.js';
 
 export const validateInput = (input: string, validator: 'username' | 'email' | 'password'): IValidation => {
     switch (validator) {

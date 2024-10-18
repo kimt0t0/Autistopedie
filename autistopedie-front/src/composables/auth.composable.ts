@@ -1,8 +1,8 @@
-import type { IJwtToken } from "@/interfaces/IJwtToken.interface";
-import type ILoginData from "@/interfaces/ILoginData.interface";
-import type { IUserAccountData } from "@/interfaces/IUserAccountData.interface";
-import { useAuthStore } from "@/stores/auth.store";
-import { getUserAuthUtil, loginUtil } from "@/utils/auth.util";
+import type { IJwtToken } from "@/interfaces/IJwtToken.interface.js";
+import type ILoginData from "@/interfaces/ILoginData.interface.js";
+import type { IUserAccountData } from "@/interfaces/IUserAccountData.interface.js";
+import { useAuthStore } from "@/stores/auth.store.js";
+import { getUserAuthUtil, loginUtil } from "@/utils/auth.util.js";
 
 export const useAuth = () => {
     const login = async (credentials: ILoginData): Promise<void> => {

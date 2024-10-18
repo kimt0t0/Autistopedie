@@ -1,5 +1,5 @@
-import { Category } from "@/enums/Category.enum";
-import type { IValidation } from "@/interfaces/IValidation.interface";
+import { Category } from "@/enums/Category.enum.js";
+import type { IValidation } from "@/interfaces/IValidation.interface.js";
 
 export const titleValidator = (input: string): IValidation => {
     if (!input || input.length < 3) {

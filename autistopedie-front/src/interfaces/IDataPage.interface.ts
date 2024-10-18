@@ -1,11 +1,10 @@
-import type { Category } from '@/enums/Category.enum';
+import type { Category } from '@/enums/Category.enum.js';
 import type { Delta } from '@vueup/vue-quill';
-import type { UUID } from 'crypto';
-import type { IIllustration } from './IIllustration.interface';
-import type { IUserAccountData } from './IUserAccountData.interface';
+import type { IIllustration } from './IIllustration.interface.js';
+import type { IUserAccountData } from './IUserAccountData.interface.js';
 
 export interface IDataPage {
-    _id?: UUID; 
+    _id?: string; 
     title: string;
     summary?: string;
     contents?: Delta | string | null;

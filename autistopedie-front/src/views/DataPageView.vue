@@ -6,7 +6,6 @@ import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil, formatImageUrlUtil } from '@/utils/formatting.util';
 import defaultIllustation from '@images/default-illustration.jpg';
-import type { UUID } from 'crypto';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -16,7 +15,7 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 
 // Get id from route params
 const route = useRoute();
-const dataId: UUID = route.params.id;
+const dataId: string = route.params.id.toString();
 
 // Data storage references
 const datapage = ref<IDataPage | void>();
@@ -30,7 +29,7 @@ const coverIllustrationPath = ref<string>(defaultIllustation);
 onBeforeMount(async () => {
     datapage.value = await useDataPage().getOne(dataId);
     if (datapage.value?.contents) {
-        const parsedContents = JSON.parse(datapage.value.contents);
+        const parsedContents = JSON.parse(datapage.value.contents.toString());
         const converter = new QuillDeltaToHtmlConverter(parsedContents.ops);
         htmlContents.value = converter.convert();
     }

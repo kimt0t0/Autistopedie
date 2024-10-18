@@ -1,7 +1,6 @@
-import type { IDataPage } from "@/interfaces/IDataPage.interface";
-import type { ISecurityCheck } from "@/interfaces/ISecurityCheck.interface";
-import { createDataPageUtil, deleteDataPageUtil, getAllDataPagesUtil, getDataPageUtil, updateDataPageUtil } from "@/utils/datapage.util";
-import type { UUID } from 'crypto';
+import type { IDataPage } from "@/interfaces/IDataPage.interface.js";
+import type { ISecurityCheck } from "@/interfaces/ISecurityCheck.interface.js";
+import { createDataPageUtil, deleteDataPageUtil, getAllDataPagesUtil, getDataPageUtil, updateDataPageUtil } from "@/utils/datapage.util.js";
 
 export const useDataPage = () => {
     const getAll = async (): Promise<IDataPage[] | void> => {
@@ -14,7 +13,7 @@ export const useDataPage = () => {
         }
     }
 
-    const getOne = async (id: UUID): Promise<IDataPage|void> => {
+    const getOne = async (id: string): Promise<IDataPage|void> => {
         try {
             const datapage = await getDataPageUtil(id);
             if (!datapage) throw new Error(`Datapage is empty.`);
@@ -34,7 +33,7 @@ export const useDataPage = () => {
         }
     }
 
-    const update = async (id: UUID, formData: IDataPage): Promise<IDataPage|void> => {
+    const update = async (id: string, formData: IDataPage): Promise<IDataPage|void> => {
         try {
             const updatedDatapage = await updateDataPageUtil(id, formData);
             if (!updatedDatapage) throw new Error(`Returned updated datapage is empty.`);
@@ -44,7 +43,7 @@ export const useDataPage = () => {
         }
     }
 
-    const deletePage = async (id: UUID, credentials: ISecurityCheck): Promise<IDataPage|void> => {
+    const deletePage = async (id: string, credentials: ISecurityCheck): Promise<IDataPage|void> => {
         try {
             const deletedDatapage = await deleteDataPageUtil(id, credentials);
             if (!deletedDatapage) throw new Error(`Returned deleted datapage is empty.`);

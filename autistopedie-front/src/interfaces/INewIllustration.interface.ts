@@ -1,6 +1,4 @@
-import type { UUID } from 'crypto';
-
 export interface INewIllustration {
-    dataId: UUID;
+    dataId: string;
     illustration: File | null;
 }

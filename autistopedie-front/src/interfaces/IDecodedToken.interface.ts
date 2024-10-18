@@ -1,8 +1,7 @@
-import type { Role } from "@/enums/Role.enum";
-import type { UUID } from 'crypto';
+import type { Role } from "@/enums/Role.enum.js";
 
 export interface IDecodedToken {
-    _id: UUID;
+    _id: string;
     username: string;
     role: Role
 }

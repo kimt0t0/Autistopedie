@@ -1,7 +1,6 @@
-import type { IDataPage } from "@/interfaces/IDataPage.interface";
-import type { ISecurityCheck } from "@/interfaces/ISecurityCheck.interface";
-import axiosInstance from "@/services/api.service";
-import type { UUID } from 'crypto';
+import type { IDataPage } from "@/interfaces/IDataPage.interface.js";
+import type { ISecurityCheck } from "@/interfaces/ISecurityCheck.interface.js";
+import axiosInstance from "@/services/api.service.js";
 
 // Get all
 export const getAllDataPagesUtil = async(): Promise<IDataPage[] | void> => {
@@ -14,7 +13,7 @@ export const getAllDataPagesUtil = async(): Promise<IDataPage[] | void> => {
 }
 
 // Get one
-export const getDataPageUtil = async(id: UUID): Promise<IDataPage | void> => {
+export const getDataPageUtil = async(id: string): Promise<IDataPage | void> => {
     try {
         const datapage = await axiosInstance.get(`/datapages/${id}`);
         return datapage.data;
@@ -34,7 +33,7 @@ export const createDataPageUtil = async(formData: IDataPage): Promise<IDataPage 
 }
 
 // Patch
-export const updateDataPageUtil = async(id: UUID, formData: IDataPage): Promise<IDataPage | void> => {
+export const updateDataPageUtil = async(id: string, formData: IDataPage): Promise<IDataPage | void> => {
     try {
         const updatedPage = await axiosInstance.patch(`/datapages/${id}`, formData);
         return updatedPage.data;
@@ -44,7 +43,7 @@ export const updateDataPageUtil = async(id: UUID, formData: IDataPage): Promise<
 }
 
 // Delete
-export const deleteDataPageUtil = async(id: UUID, credentials: ISecurityCheck): Promise<IDataPage | void> => {
+export const deleteDataPageUtil = async(id: string, credentials: ISecurityCheck): Promise<IDataPage | void> => {
     try {
         const deletedPage = await axiosInstance.delete(`/datapages/${id}`, { data: credentials});
         return deletedPage.data;

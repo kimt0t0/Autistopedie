@@ -33,6 +33,7 @@ import ContentSave from 'vue-material-design-icons/ContentSave.vue';
 import Delete from 'vue-material-design-icons/Delete.vue';
 import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
+import EmailBox from 'vue-material-design-icons/EmailBox.vue';
 import Eye from 'vue-material-design-icons/Eye.vue';
 import EyeOff from 'vue-material-design-icons/EyeOff.vue';
 import Glasses from 'vue-material-design-icons/Glasses.vue';
@@ -80,6 +81,7 @@ app.component('account-icon', Account)
     .component('delete-icon', Delete)
     .component('door-closed-cancel-icon', DoorClosedCancel)
     .component('dots-vertical-icon', DotsVertical)
+    .component('email-box-icon', EmailBox)
     .component('eye-icon', Eye)
     .component('eye-off-icon', EyeOff)
     .component('glasses-icon', Glasses)

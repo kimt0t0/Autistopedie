@@ -1,0 +1,25 @@
+@keyframes leafToAutumn {
+    20% {
+    }
+    30% {
+        top: 0;
+        left: -$space-m;
+        transform: rotate(4deg);
+        background-color: #DFAF2C;
+    }
+    40% {
+        top: -$space-s;
+        transform: rotate(-2deg);
+        background-color: adjust-color($alert, $lightness: 15%);
+    }
+    60% {
+        left: -$space-m;
+        background-color: $alert;
+    }
+    100% {
+        top: -$space-l;
+        transform: rotate(6deg);
+        left: -$space-xl;
+        background-color: $dark;
+    }
+}

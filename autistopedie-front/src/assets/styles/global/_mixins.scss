@@ -24,9 +24,14 @@
     @include classicPadding();
     text-align: center;
     @include transition();
-    &:hover, &.active {
+    &:hover,
+    &.active {
         background-color: $primary;
         color: $grey;
+        > .material-design-icon {
+            @include transition();
+            transform: rotate(380deg);
+        }
     }
 }
 
@@ -58,8 +63,8 @@
     right: 0;
     z-index: 2;
     @media (max-width: $bp-m) {
-        left:0;
-        right:0;
+        left: 0;
+        right: 0;
         margin-left: auto;
         margin-right: auto;
         width: 80vw;
@@ -67,7 +72,8 @@
     @media (max-width: $bp-xxs) {
         width: 80vw;
     }
-    > a, > button {
+    > a,
+    > button {
         height: 60px;
         width: 100%;
         display: flex;
@@ -99,4 +105,31 @@
     background-color: adjust-color($alert, $lightness: 30%);
     color: adjust-color($alert, $lightness: -15%);
     font-weight: 600;
+}
+
+@mixin listItemStyle() {
+    list-style-type: none;
+    position: relative;
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 3;
+        top: $space-xs;
+        left: -$space-l;
+        box-sizing: border-box;
+        min-width: 16px;
+        width: 16px;
+        min-height: 10px;
+        height: 10px;
+        background-color: $success;
+        border: 2px solid $dark;
+        border-radius: 0 $radius-l 0 $radius-l;
+        cursor: pointer;
+        @include transition();
+    }
+    &:hover::before {
+        animation: leafToAutumn;
+        animation-duration: 600ms;
+        animation-timing-function: ease-in;
+    }
 }

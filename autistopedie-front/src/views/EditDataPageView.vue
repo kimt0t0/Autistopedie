@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useDataPage } from '@/composables/datapage.composable';
+import { Role } from '@/enums/Role.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil } from '@/utils/formatting.util';
@@ -34,7 +35,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <PageGuard v-if="!useAuthStore().userAuth" />
+    <PageGuard v-if="!useAuthStore().userAuth|| useAuthStore().decodedToken?.role != (Role.ADMIN || Role.CONTRIBUTOR)" />
 
     <div v-else class="classic-container edit-datapage-container">
         <HeroTitle color="primary">Mode édition</HeroTitle>

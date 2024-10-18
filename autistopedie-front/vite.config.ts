@@ -16,7 +16,6 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url)),
             '@images': fileURLToPath(new URL('./src/assets/images', import.meta.url)),
             '@icons': fileURLToPath(new URL('./src/assets/icons', import.meta.url)),
-            'vue-material-design-icons': 'vue-material-design-icons/index.js',
         },
     },
     css: {

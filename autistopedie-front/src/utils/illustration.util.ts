@@ -35,7 +35,7 @@ export const createIllustrationUtil = async(formData: INewIllustration): Promise
 }
 
 // Delete
-export const deleteIllustrationUtil = async(id: UUID): Promise<IIllustration | void> => {
+export const deleteIllustrationUtil = async(id: string): Promise<IIllustration | void> => {
     try {
         const deletedIllustration = await axiosInstance.delete(`/illustrations/${id}`);
         return deletedIllustration.data;

@@ -41,7 +41,7 @@ const resetFile = (): void => {
 
 // validate form
 const formIsValid = computed((): boolean => {
-    return formData.illustration != undefined && formData.dataId;
+    return (formData.illustration && formData.dataId) ? true : false;
 });
 
 // check if success creation
@@ -80,10 +80,12 @@ const onSubmit = async () => {
 // delete
 const onDelete = async () => {
     try {
-        const deletedIllustration = await useIllustration().deleteIllustration(props.illustration?._id);
-        if (!deletedIllustration) throw new Error('Deleted illustration returned is empty.');
-        previewIllustration.value = defaultIllustration;
-        setDeletedIsSuccess(true);
+        if(props.illustration) {
+            const deletedIllustration = await useIllustration().deleteIllustration(props.illustration?._id);
+            if (!deletedIllustration) throw new Error('Deleted illustration returned is empty.');
+            previewIllustration.value = defaultIllustration;
+            setDeletedIsSuccess(true);
+        }
     } catch (e) {
         console.error(`Illustration could not be deleted due to error: ${e}`);
         setDeletedIsError(true);

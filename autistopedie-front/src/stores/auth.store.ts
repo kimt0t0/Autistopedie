@@ -11,8 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
     const getAuth = (): void => {
         userAuth.value = localStorage.getItem('authenticatedUser');
         if (userAuth.value != null) {
-            const access_token = JSON.parse(userAuth.value).access_token;
-            decodedToken.value = jwtDecode<IDecodedToken>(access_token);
+            decodedToken.value = jwtDecode<IDecodedToken>(userAuth.value);
         }
     }
     

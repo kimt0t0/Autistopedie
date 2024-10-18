@@ -42,6 +42,7 @@ import DataForm from './components/forms/DataForm.vue';
 import DeleteDataForm from './components/forms/DeleteDataForm.vue';
 import IllustrationForm from './components/forms/IllustrationForm.vue';
 import Card from './components/global/Card.vue';
+import PageGuard from './components/layout/PageGuard.vue';
 
 const app = createApp(App);
 
@@ -58,6 +59,7 @@ app.component('Button', Button)
     .component('DeleteDataForm', DeleteDataForm)
     .component('IllustrationForm', IllustrationForm)
     .component('Gallery', Gallery)
+    .component('PageGuard', PageGuard)
     .component('SuccessMessage', SuccessMessage);
 
 // Import Quill library as a component

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useDataPage } from '@/composables/datapage.composable';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
+import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil } from '@/utils/formatting.util';
 import defaultIllustration from '@images/default-illustration.jpg';
 import type { UUID } from 'crypto';
@@ -33,7 +34,9 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-    <div class="classic-container edit-datapage-container">
+    <PageGuard v-if="!useAuthStore().userAuth" />
+
+    <div v-else class="classic-container edit-datapage-container">
         <HeroTitle color="primary">Mode édition</HeroTitle>
         <RouterLink :to="'/page/' + dataId" class="page-link">
             <glasses-icon></glasses-icon> Voir la page

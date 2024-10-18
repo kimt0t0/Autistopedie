@@ -6,6 +6,7 @@ import HeroTitle from '@/components/global/HeroTitle.vue';
 import { useAuth } from '@/composables/auth.composable';
 import { Role } from '@/enums/Role.enum';
 import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
+import { useAuthStore } from '@/stores/auth.store';
 import { onBeforeMount, ref } from 'vue';
 
 const user = ref<IUserAccountData | undefined>();
@@ -39,7 +40,9 @@ const toggleIsEdit = (): void => {
 </script>
 
 <template>
-    <section class="classic-container dashboard-container">
+    <PageGuard v-if="!useAuthStore().userAuth" />
+    
+    <section v-else class="classic-container dashboard-container">
         <HeroTitle>Bienvenue <span class="success" v-if="user">{{ user?.username }} !</span></HeroTitle>
         <Dropdown title="Mes informations" color="success">
             <Button class="toggle-form-button" :color="isEdit ? 'success' : 'secondary'" shape="round" @click="toggleIsEdit()">

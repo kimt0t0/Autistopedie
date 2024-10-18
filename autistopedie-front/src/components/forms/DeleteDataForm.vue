@@ -116,7 +116,7 @@ const onSubmit = async (): Promise<void> => {
 
 <style lang="scss" scoped>
 form {
-    background-color: adjust-color($shadows, $lightness: 35%);
+    background-color:lighten($shadows, 35);
     border: 3px solid $shadows;
     border-radius: $radius-xs;
     @include classicPadding();
@@ -126,7 +126,7 @@ form {
             color: $alert;
         }
         > p {
-            color: adjust-color($shadows, $lightness: -10%);
+            color: darken($shadows, 10);
             font-size: $font-xs;
             font-weight: 600;
         }

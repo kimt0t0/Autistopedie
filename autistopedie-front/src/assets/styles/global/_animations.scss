@@ -10,7 +10,7 @@
     40% {
         top: -$space-s;
         transform: rotate(-2deg);
-        background-color: adjust-color($alert, $lightness: 15%);
+        background-color: lighten($alert, 15);
     }
     60% {
         left: -$space-m;

@@ -100,10 +100,10 @@
 @mixin alertStyling() {
     box-sizing: border-box;
     border-radius: $radius-xxs;
-    border: 2px solid adjust-color($alert, $lightness: -15%);
+    border: 2px solid darken($alert, 15);
     @include classicPadding();
-    background-color: adjust-color($alert, $lightness: 30%);
-    color: adjust-color($alert, $lightness: -15%);
+    background-color: lighten($alert, 30);
+    color: darken($alert, 15);
     font-weight: 600;
 }
 

@@ -237,7 +237,7 @@ $brown-02: #4f4447;
 
 .cn-right {
     clip-path: polygon(100% 0, 0 50%, 100% 100%);
-    box-shadow: 2rem 0 0.75rem darken($grey-02, 12%) inset;
+    box-shadow: 2rem 0 0.75rem darken($grey-02, 12) inset;
     top: 6rem;
     right: 7rem;
 }
@@ -364,7 +364,7 @@ $brown-02: #4f4447;
     height: 1.5rem;
     background-color: $brown-01;
     clip-path: polygon(50% 0%, 100% 35%, 50% 100%, 0 35%);
-    box-shadow: 0.75rem 0.5rem 0.25rem darken($brown-02, 10%) inset;
+    box-shadow: 0.75rem 0.5rem 0.25rem darken($brown-02, 10) inset;
     top: 8.25rem;
     right: 3.5rem;
     transform: rotate(2deg);
@@ -377,7 +377,7 @@ $brown-02: #4f4447;
     height: 2.5rem;
     clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
     background-color: $brown-01;
-    box-shadow: 0.5rem 0 0.25rem darken($brown-02, 10%) inset;
+    box-shadow: 0.5rem 0 0.25rem darken($brown-02, 10) inset;
     top: 6.25rem;
     right: 3.7rem;
     transform: rotate(2deg);
@@ -389,7 +389,7 @@ $brown-02: #4f4447;
     width: 3rem;
     height: 0.7rem;
     background-color: $brown-01;
-    box-shadow: 0 -0.15rem 0.15rem darken($brown-02, 10%) inset;
+    box-shadow: 0 -0.15rem 0.15rem darken($brown-02, 10) inset;
     transform: rotate(2deg);
     top: 5.8rem;
     right: 2.65rem;
@@ -409,13 +409,13 @@ $brown-02: #4f4447;
 }
 
 .shc-left {
-    box-shadow: 0.08rem -0.15rem 0.15rem darken($brown-02, 10%) inset;
+    box-shadow: 0.08rem -0.15rem 0.15rem darken($brown-02, 10) inset;
     top: 5.5rem;
     right: 5rem;
 }
 
 .shc-right {
-    box-shadow: -0.08rem -0.15rem 0.15rem darken($brown-02, 10%) inset;
+    box-shadow: -0.08rem -0.15rem 0.15rem darken($brown-02, 10) inset;
     top: 5.65rem;
     right: 2rem;
 }
@@ -434,7 +434,7 @@ $brown-02: #4f4447;
     z-index: 3;
     width: 1rem;
     height: 1rem;
-    background-color: darken($brown-02, 10%);
+    background-color: darken($brown-02, 10);
     clip-path: polygon(100% 0, 0 0, 50% 100%);
     transform: rotate(2deg);
 }
@@ -455,7 +455,7 @@ $brown-02: #4f4447;
     z-index: 3;
     width: 2rem;
     height: 4.5rem;
-    background-color: lighten($brown-01, 6%);
+    background-color: lighten($brown-01, 6);
     border-radius: 0.25rem 0.25rem 0 0;
     transform: rotate(2deg);
     top: 1.4rem;
@@ -476,7 +476,7 @@ $brown-02: #4f4447;
     width: 2rem;
     height: 1.5rem;
     clip-path: polygon(50% 0, 0 100%, 100% 100%);
-    background-color: lighten($brown-01, 6%);
+    background-color: lighten($brown-01, 6);
     transform: rotate(2deg);
     top: 0;
     right: 2.9rem;

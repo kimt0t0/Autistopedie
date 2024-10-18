@@ -56,6 +56,9 @@ defineProps<{
             color: $alert;
             border-bottom-color: $alert;
         }
+        @media (max-width: $bp-m) {
+            border-bottom: none;
+        }
     }
 }
 </style>

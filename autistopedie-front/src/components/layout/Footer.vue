@@ -22,6 +22,7 @@ footer {
     font-size: $font-xxs;
     font-weight: 600;
     > p {
+        text-align: center;
         margin: 0;
     }
     > .separator {
@@ -33,18 +34,18 @@ footer {
         @include transition;
         &:hover {
             transform: rotate(190deg);
-            background-color: $success;
+            background-color: $secondary;
         }
     }
 }
 
 a {
-    color: $primary;
+    color: $secondary;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     padding: 0 $space-s 0 $space-xxs;
     &:hover {
-        border-color: $primary;
+        border-color: $secondary;
     }
 }
 </style>

@@ -43,7 +43,7 @@ const toggleIsEdit = (): void => {
     <PageGuard v-if="!useAuthStore().userAuth" />
     
     <section v-else class="classic-container dashboard-container">
-        <HeroTitle>Bienvenue <span class="success" v-if="user">{{ user?.username }} !</span></HeroTitle>
+        <HeroTitle>Bienvenue <span class="success" v-if="user">{{ user?.username }}</span></HeroTitle>
         <Dropdown title="Mes informations" color="success">
             <Button class="toggle-form-button" :color="isEdit ? 'success' : 'secondary'" shape="round" @click="toggleIsEdit()">
                 <glasses-icon v-if="isEdit"></glasses-icon>

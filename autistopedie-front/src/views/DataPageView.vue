@@ -59,14 +59,6 @@ const setIsDeleteAction = (value: boolean): void => {
 
 <template>
     <section class="classic-container">
-        <div class="actions-container" v-if="useAuthStore().decodedToken?.role == (Role.ADMIN || Role.CONTRIBUTOR)">
-            <RouterLink :to="'/edition/' + dataId" class="button-styled-link secondary">
-                <pencil-icon></pencil-icon> Éditer
-            </RouterLink>
-            <Button type="button" color="alert" @click="setIsDeleteAction(true)">
-                <delete-icon></delete-icon> Supprimer
-            </Button>
-        </div>
         <div class="alerts" v-if="isDeleteAction">
             <DeleteDataForm :dataId="dataId" />
             <Button type="button" color="alert" @click="setIsDeleteAction(false)">
@@ -85,6 +77,14 @@ const setIsDeleteAction = (value: boolean): void => {
             <p v-else>Désolé, la page ne parvient pas à formatter votre contenu correctement. Si le problème persiste veuillez contacter le support s'il-vous-plaît.</p>
         </div>
         <p v-else>Cette page n'a pas encore de contenu.</p>
+        <div class="actions-container" v-if="useAuthStore().decodedToken?.role == (Role.ADMIN || Role.CONTRIBUTOR)">
+            <RouterLink :to="'/edition/' + dataId" class="button-styled-link secondary">
+                <pencil-icon></pencil-icon> Éditer
+            </RouterLink>
+            <Button type="button" color="alert" @click="setIsDeleteAction(true)">
+                <delete-icon></delete-icon> Supprimer
+            </Button>
+        </div>
     </section>
 </template>
 
@@ -130,6 +130,25 @@ const setIsDeleteAction = (value: boolean): void => {
         width: 160px;
         &:hover {
             color: $grey;
+        }
+    }
+    @media (max-width: $bp-m) {
+        position: initial;
+        top: initial;
+        background-color: transparent;
+        flex-direction: row;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        margin-top: $space-l;
+        padding: $space-m $space-xs $space-s;
+        border-radius: 0;
+        border-top: 3px solid $secondary;
+    }
+    @media (max-width: $bp-s) {
+        justify-content: flex-start;
+        > a, > button {
+            width: 100%;
+            justify-content: center;
         }
     }
 }

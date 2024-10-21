@@ -29,7 +29,7 @@ const updatedDateFormatted = computed(() => formatDateUtil(updatedAt.value));
 <template>
     <RouterLink :to="'/page/' + datapage._id">
     <div class="card">
-        <img :src="illustrationPath" :alt="'Cover illustration of ' + datapage.title" class="cover-illustration" crossorigin="anonymous" />
+        <img :src="illustrationPath" :alt="'Cover illustration of ' + datapage.title" class="cover-illustration" crossorigin="anonymous" loading="lazy" />
         <div class="presentation">
             <h3>{{ datapage.title }}</h3>
             <p><strong>Ajouté par:</strong> {{ datapage.dataAuthor?.username }}</p>

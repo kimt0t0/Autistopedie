@@ -7,7 +7,7 @@
                 <p>J'ai réalisé ce prototype "from scratch" en deux semaines afin de candidater à une offre d'emploi pour des recherches sur les représentations genrées de l'autisme. Il n'est donc pas abouti, mais vise à donner une idée de son fonctionnement possible et démontrer mes compétences en développement web.</p>
                 <p>Ainsi, même si ma candidature n'est finalement pas retenue, je pense continuer à améliorer ce projet régulièrement et lui donner une vraie vie avec de vrais contenus - éventuellement en prenant une direction un peu différente de celle prévue initialement pour ne pas concurrencer le projet de recherche auquel je souhaite me joindre.</p>
             </div>
-            <img src="@images/me.jpg" alt="Photographie de l'auteur.ice du site, vue de torse" class="picture" />
+            <img src="@images/me.jpg" alt="Photographie de l'auteur.ice du site, vue de torse" class="picture" loading="lazy" />
         </article>
 
         <article class="technic">

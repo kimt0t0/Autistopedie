@@ -98,7 +98,7 @@ const onDelete = async () => {
 
 <template>
     <form @submit.prevent="onSubmit()">
-        <img :src="previewIllustration" alt="Current illustration" />
+        <img :src="previewIllustration" alt="Current illustration" loading="lazy" />
         <label>{{ isEdit ? "Modifier l'" : 'Ajouter une' }} illustration de couverture:</label>
         <div class="horizontal-display">
             <Button color="secondary" class="select-button">

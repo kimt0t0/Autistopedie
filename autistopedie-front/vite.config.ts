@@ -9,15 +9,25 @@ import { defineConfig } from 'vite';
 export default defineConfig({
     plugins: [vue(), vueJsx()],
     build: {
-        target: "esnext",
-        outDir: "dist"
+        target: 'esnext',
+        outDir: 'dist',
+        chunkSizeWarningLimit: 600,
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        return id.toString().split('node_modules/')[1].split('/')[0].toString();
+                    }
+                },
+            },
+        },
     },
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
             '@images': fileURLToPath(new URL('./src/assets/images', import.meta.url)),
             '@icons': fileURLToPath(new URL('./src/assets/icons', import.meta.url)),
-            "icons": path.resolve(__dirname, "node_modules/vue-material-design-icons")
+            icons: path.resolve(__dirname, 'node_modules/vue-material-design-icons'),
         },
     },
     css: {

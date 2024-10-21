@@ -22,6 +22,7 @@ export default defineConfig({
         preprocessorOptions: {
             scss: {
                 additionalData: `@import "@/assets/styles/theme.scss";`,
+                quietDeps: true, // limits deprecation warnings
             },
         },
     },

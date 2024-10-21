@@ -19,11 +19,14 @@ Le code du site est sous licence open-source GNU-LGPL.
 <details>
 <summary>To-do Front-end</summary>
 
-- Navbar: replace "je veux contribuer" by "ajouter du contenu" for auth users with corresponding roles
-- Fix summary and authors validation regex for datapage
-- Add page guard / redirect for pages not allowed to unauthentified users
+- Add contents to Definition page
+- Add filters
+- Add automated tests
 </details>
 
 <details>
 <summary>To-do Back-end</summary>
+
+- Add automated tests
+- Check data validation for illustrations creation
 </details>

@@ -70,7 +70,7 @@ const formIsValid = computed((): boolean => {
 });
 
 // Get Quill content as HTML
-const getQuillContent = (): Delta | string | undefined => {
+const getQuillContent = (): typeof Delta | string | undefined => {
     if (quillRef.value) {
         return quillRef.value.getContents();
     }
@@ -98,8 +98,8 @@ const setIsAddIllustration = (value: boolean) :void => {
 const onSubmit = async (): Promise<void> => {
     try {
         formData.contents = JSON.stringify(getQuillContent());
-        if (props.datapage) {
-            const updatedData = await useDataPage().update(props.datapage._id, formData);
+        if (props.datapage && props.datapage._id) {
+            const updatedData = await useDataPage().update(props.datapage._id.toString(), formData);
             if (updatedData == null) {
                 throw new Error("Returned updated datapage is null.")
             }

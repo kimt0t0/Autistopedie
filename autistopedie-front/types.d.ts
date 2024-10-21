@@ -3,7 +3,9 @@ declare module 'quill-delta' {
   export = QuillDelta;
 }
 
+
 declare module 'vue-material-design-icons/*' {
-  const IconComponent: any;
-  export default IconComponent;
+  import { DefineComponent } from 'vue';
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
 }

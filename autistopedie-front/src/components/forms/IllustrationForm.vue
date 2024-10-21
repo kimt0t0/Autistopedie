@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useIllustration } from '@/composables/illustration.composable';
+import { config } from '@/config/config';
 import type { IIllustration } from '@/interfaces/IIllustration.interface';
 import type { INewIllustration } from '@/interfaces/INewIllustration.interface';
 import { formatImageUrlUtil } from '@/utils/formatting.util';
@@ -7,8 +8,8 @@ import defaultIllustration from '@images/default-illustration.jpg';
 import { computed, reactive, ref } from 'vue';
 import SuccessMessage from '../global/SuccessMessage.vue';
 
-// API URL
-const apiUrl: string = import.meta.env.VITE_API_URL;
+// get API URL from config file
+const { apiUrl } = config;
 
 // get data page id from parent component
 const props = defineProps<{

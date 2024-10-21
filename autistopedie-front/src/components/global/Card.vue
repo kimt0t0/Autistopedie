@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+import { config } from '@/config/config';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { formatDateUtil, formatImageUrlUtil } from '@/utils/formatting.util';
 import defaultIllustration from '@images/default-illustration.jpg';
 import { computed, ref } from 'vue';
 
-// API URL
-const apiUrl: string = import.meta.env.VITE_API_URL;
+// get API URL from config file
+const { apiUrl } = config;
 
 // Get datapage from page
 const props = defineProps<{

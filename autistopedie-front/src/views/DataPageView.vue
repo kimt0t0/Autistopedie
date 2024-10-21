@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import HeroTitle from '@/components/global/HeroTitle.vue';
 import { useDataPage } from '@/composables/datapage.composable';
+import { config } from '@/config/config';
 import { Role } from '@/enums/Role.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
@@ -10,8 +11,8 @@ import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { onBeforeMount, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-// API URL
-const apiUrl: string = import.meta.env.VITE_API_URL;
+// get API URL from config file
+const { apiUrl } = config;
 
 // Get id from route params
 const route = useRoute();

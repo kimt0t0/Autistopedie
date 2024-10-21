@@ -7,9 +7,9 @@
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
         "skipLibCheck": true,
         "esModuleInterop": true, // Pour améliorer la compatibilité avec les modules CommonJS
-        "moduleResolution": "Node16", // Assure que TypeScript résout correctement les modules externes
+        "moduleResolution": "Node", // Assure que TypeScript résout correctement les modules externes
         "target": "ESNext", // Permet de cibler les dernières versions de JavaScript
-        "module": "Node16", // Utilisation des modules ES
+        "module": "ESNext", // Utilisation des modules ES
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]

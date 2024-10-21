@@ -17,6 +17,12 @@ main {
     padding: $space-xl 0;
 }
 
+// Page content transition effect
+.fade-enter-active,
+.fade-leave-active {
+    @include transition();
+}
+
 // Containers
 .classic-container {
     max-width: 1200px;

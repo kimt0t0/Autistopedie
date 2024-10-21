@@ -2,13 +2,14 @@
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 
 defineProps<{
-    dataPages?: IDataPage[]|void;
+    dataPages?: IDataPage[]|IDataPage | void;
 }>();
 </script>
 
 <template>
     <div class="horizontal-display gallery-container">
-        <Card v-for="(page, index) in dataPages" :key="index" :datapage="page" />
+        <Card v-if="Array.isArray(dataPages)" v-for="(page, index) in dataPages" :key="index" :datapage="page" />
+        <Card v-else :datapage="dataPages" />
     </div>
 </template>
 

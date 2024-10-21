@@ -7,7 +7,7 @@ export interface IDataPage {
     _id?: string; 
     title: string;
     summary?: string;
-    contents?: Delta | string | null;
+    contents?: typeof Delta | string | null;
     authors?: string;
     categories: Category[];
     illustration?: IIllustration;

@@ -66,7 +66,16 @@
 
     .introduction {
         display: flex;
+        flex-wrap: wrap;
         gap: $space-xxl;
+        @media (max-width: $bp-l) {
+            gap: $space-l;
+        }
+        @media (max-width: $bp-m) {
+            flex-direction: column-reverse;
+            justify-content: flex-start;
+            align-items: center;
+        }
         > .picture {
             width: 200px;
             border-radius: $radius-l;
@@ -76,6 +85,10 @@
             @include transition();
             &:hover, &:focus {
                 filter: none;
+            }
+            @media (max-width: $bp-s) {
+                width: auto;
+                max-height: 300px;
             }
         }
         > .contents {

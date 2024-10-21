@@ -17,7 +17,7 @@ import { Quill, QuillEditor } from '@vueup/vue-quill';
 // Auto format links
 import MagicUrl from 'quill-magic-url';
 // Formatter for images and videos
-import BlotFormatter from 'quill-blot-formatter';
+// import BlotFormatter from 'quill-blot-formatter';
 // Quill UI themes (test and choose one)
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -52,6 +52,6 @@ app.component('Button', Button)
 app.component('QuillEditor', QuillEditor);
 // detects emails and URLs in the editor and automatically converts to link
 Quill.register('modules/magicUrl', MagicUrl);
-Quill.register('modules/blotFormatter', BlotFormatter);
+// Quill.register('modules/blotFormatter', BlotFormatter);
 
 app.mount('#app');

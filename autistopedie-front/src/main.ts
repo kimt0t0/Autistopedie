@@ -23,23 +23,23 @@ import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 // Icons from Vue Material Icons
-import Account from 'vue-material-design-icons/Account.vue';
-import AccountOff from 'vue-material-design-icons/AccountOff.vue';
-import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
-import ChevronUp from 'vue-material-design-icons/ChevronUp.vue';
-import Close from 'vue-material-design-icons/Close.vue';
-import Cog from 'vue-material-design-icons/Cog.vue';
-import CogOff from 'vue-material-design-icons/CogOff.vue';
-import ContentSave from 'vue-material-design-icons/ContentSave.vue';
-import Delete from 'vue-material-design-icons/Delete.vue';
-import DoorClosedCancel from 'vue-material-design-icons/DoorClosedCancel.vue';
-import DotsVertical from 'vue-material-design-icons/DotsVertical.vue';
-import EmailBox from 'vue-material-design-icons/EmailBox.vue';
-import Eye from 'vue-material-design-icons/Eye.vue';
-import EyeOff from 'vue-material-design-icons/EyeOff.vue';
-import Glasses from 'vue-material-design-icons/Glasses.vue';
-import Pencil from 'vue-material-design-icons/Pencil.vue';
-import Plus from 'vue-material-design-icons/Plus.vue';
+import AccountIcon from 'vue-material-design-icons/Account.vue';
+import AccountOffIcon from 'vue-material-design-icons/AccountOff.vue';
+import ChevronDownIcon from 'vue-material-design-icons/ChevronDown.vue';
+import ChevronUpIcon from 'vue-material-design-icons/ChevronUp.vue';
+import CloseIcon from 'vue-material-design-icons/Close.vue';
+import CogIcon from 'vue-material-design-icons/Cog.vue';
+import CogOffIcon from 'vue-material-design-icons/CogOff.vue';
+import ContentSaveIcon from 'vue-material-design-icons/ContentSave.vue';
+import DeleteIcon from 'vue-material-design-icons/Delete.vue';
+import DoorClosedCancelIcon from 'vue-material-design-icons/DoorClosedCancel.vue';
+import DotsVerticalIcon from 'vue-material-design-icons/DotsVertical.vue';
+import EmailBoxIcon from 'vue-material-design-icons/EmailBox.vue';
+import EyeIcon from 'vue-material-design-icons/Eye.vue';
+import EyeOffIcon from 'vue-material-design-icons/EyeOff.vue';
+import GlassesIcon from 'vue-material-design-icons/Glasses.vue';
+import PencilIcon from 'vue-material-design-icons/Pencil.vue';
+import PlusIcon from 'vue-material-design-icons/Plus.vue';
 
 // Global components
 import DataForm from './components/forms/DataForm.vue';
@@ -74,22 +74,22 @@ Quill.register('modules/magicUrl', MagicUrl);
 Quill.register('modules/blotFormatter', BlotFormatter);
 
 // Icons from Vue Material Icons
-app.component('account-icon', Account)
-    .component('account-off-icon', AccountOff)
-    .component('chevron-down-icon', ChevronDown)
-    .component('chevron-up-icon', ChevronUp)
-    .component('close-icon', Close)
-    .component('cog-icon', Cog)
-    .component('cog-off-icon', CogOff)
-    .component('content-save-icon', ContentSave)
-    .component('delete-icon', Delete)
-    .component('door-closed-cancel-icon', DoorClosedCancel)
-    .component('dots-vertical-icon', DotsVertical)
-    .component('email-box-icon', EmailBox)
-    .component('eye-icon', Eye)
-    .component('eye-off-icon', EyeOff)
-    .component('glasses-icon', Glasses)
-    .component('pencil-icon', Pencil)
-    .component('plus-icon', Plus);
+app.component('account-icon', AccountIcon)
+    .component('account-off-icon', AccountOffIcon)
+    .component('chevron-down-icon', ChevronDownIcon)
+    .component('chevron-up-icon', ChevronUpIcon)
+    .component('close-icon', CloseIcon)
+    .component('cog-icon', CogIcon)
+    .component('cog-off-icon', CogOffIcon)
+    .component('content-save-icon', ContentSaveIcon)
+    .component('delete-icon', DeleteIcon)
+    .component('door-closed-cancel-icon', DoorClosedCancelIcon)
+    .component('dots-vertical-icon', DotsVerticalIcon)
+    .component('email-box-icon', EmailBoxIcon)
+    .component('eye-icon', EyeIcon)
+    .component('eye-off-icon', EyeOffIcon)
+    .component('glasses-icon', GlassesIcon)
+    .component('pencil-icon', PencilIcon)
+    .component('plus-icon', PlusIcon);
 
 app.mount('#app');

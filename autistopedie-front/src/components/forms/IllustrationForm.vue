@@ -115,7 +115,6 @@ const onDelete = async () => {
             <Button type="button" class="cancel-button" size="small" color="alert" @click="resetFile()">Annuler</Button>
         </div>
         <Button color="success" :disabled="!formIsValid">
-            <content-save-icon></content-save-icon>
             Enregistrer
         </Button>
     </form>

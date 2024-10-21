@@ -2,6 +2,7 @@
 import { Role } from '@/enums/Role.enum';
 import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
 import { editRoleValidator, emailValidator, passwordValidator, usernameValidator } from '@/validators/auth.validator';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/16/solid';
 import { computed, reactive, ref } from 'vue';
 
 const user: IUserAccountData = {
@@ -90,8 +91,8 @@ const onSubmit = (): void => {
                     required
                 />
                 <Button type="button" size="small" color="grey" @click="toggleIsNewPasswordHidden()">
-                    <eye-icon class="password-button-icon" v-if="isNewPasswordHidden"></eye-icon>
-                    <eye-off-icon class="password-button-icon" v-else></eye-off-icon>
+                    <EyeIcon class="password-button-icon" v-if="isNewPasswordHidden" />
+                    <EyeSlashIcon class="password-button-icon" v-else />
                 </Button>
                 <label class="input-label" for="password">Nouveau mot-de-passe</label>
             </div>
@@ -125,8 +126,8 @@ const onSubmit = (): void => {
                         required
                     />
                     <Button type="button" size="small" color="grey" @click="toggleIsPasswordHidden()">
-                        <eye-icon class="password-button-icon" v-if="isPasswordHidden"></eye-icon>
-                        <eye-off-icon class="password-button-icon" v-else></eye-off-icon>
+                        <EyeIcon class="password-button-icon" v-if="isPasswordHidden" />
+                        <EyeSlashIcon class="password-button-icon" v-else />
                     </Button>
                     <label class="input-label" for="password">password</label>
                 </div>

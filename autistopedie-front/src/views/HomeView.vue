@@ -3,6 +3,7 @@ import Gallery from '@/components/global/Gallery.vue';
 import SearchBox from '@/components/global/SearchBox.vue';
 import { useDataPage } from '@/composables/datapage.composable';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/16/solid';
 import { onBeforeMount, ref } from 'vue';
 
 const selectedPages = ref<IDataPage[]|void|undefined>();
@@ -34,8 +35,8 @@ const setIsError = (value: boolean):void => {
         <HeroTitle color="primary">Recherche</HeroTitle>
         <Button :class="'search-button ' + (isShowSearchBox ? 'active' : '')" color="grey" @click="toggleSearchBox()">
             Filtres 
-            <chevron-up-icon v-if="isShowSearchBox"></chevron-up-icon>
-            <chevron-down-icon v-else></chevron-down-icon>
+            <ChevronUpIcon v-if="isShowSearchBox" />
+            <ChevronDownIcon v-else />
         </Button>
         <SearchBox v-if="isShowSearchBox" />
         <Gallery :dataPages="selectedPages" />

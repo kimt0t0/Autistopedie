@@ -5,6 +5,7 @@ import { Category } from '@/enums/Category.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
 import { authorsValidator, categoriesValidator, summaryValidator, titleValidator } from '@/validators/data.validator';
+import { XMarkIcon } from '@heroicons/vue/16/solid';
 import type { Delta, QuillEditor } from '@vueup/vue-quill';
 import { computed, onBeforeMount, reactive, ref } from 'vue';
 import SuccessMessage from '../global/SuccessMessage.vue';
@@ -70,7 +71,7 @@ const formIsValid = computed((): boolean => {
 });
 
 // Get Quill content as HTML
-const getQuillContent = (): typeof Delta | string | undefined => {
+const getQuillContent = (): Delta | string | undefined => {
     if (quillRef.value) {
         return quillRef.value.getContents();
     }
@@ -185,11 +186,10 @@ const onSubmit = async (): Promise<void> => {
         </div>
         <div class="horizontal-display">
             <Button color="success" :disabled="!formIsValid || createdIsSuccess">
-                <content-save-icon></content-save-icon>
                 Enregistrer
             </Button>
             <RouterLink :to="props.datapage ? ('/page/' + props.datapage?._id) : '/mon-compte'" class="button-styled-link  alert">
-                <close-icon></close-icon> Annuler
+                Annuler
             </RouterLink>
         </div>
     </form>
@@ -203,7 +203,7 @@ const onSubmit = async (): Promise<void> => {
     </SuccessMessage>
     <div v-if="isAddIllustration" class="illustration-form-container">
         <Button size="small" color="alert" @click="setIsAddIllustration(false)">
-            <close-icon></close-icon>
+            <XMarkIcon />
         </Button>
         <IllustrationForm dataId="6706886ad50b9bcfee1e3c7f" />
     </div>

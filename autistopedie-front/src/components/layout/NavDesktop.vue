@@ -2,6 +2,7 @@
 import router from '@/router';
 import { useAuthStore } from '@/stores/auth.store';
 import { useModalStore } from '@/stores/modal.store';
+import { ChevronUpIcon, Cog6ToothIcon, UserIcon } from '@heroicons/vue/16/solid';
 import { ref } from 'vue';
 
 const isShowUserMenu = ref<boolean>(false);
@@ -24,15 +25,15 @@ const onDisconnect = (): void => {
             <RouterLink to="/a-propos">A Propos</RouterLink>
             <!-- User auth modal button -->
             <Button shape="round" v-if="!useAuthStore().userAuth" @click="useModalStore().toggleIsShow()">
-                <account-icon></account-icon>
+                <UserIcon />
             </Button>
             <!-- User connected menu button -->
             <div v-else class="user-menu-container">
                 <Button class="active" shape="round" v-if="isShowUserMenu" @click="setIsShowUserMenu(true)">
-                    <cog-off-icon></cog-off-icon>
+                    <ChevronUpIcon />
                 </Button>
                 <Button shape="round" v-else @click="setIsShowUserMenu(false)">
-                    <cog-icon></cog-icon>
+                    <Cog6ToothIcon />
                 </Button>
                 <div class="user-menu" v-if="isShowUserMenu">
                     <RouterLink @click="setIsShowUserMenu(false)" to="/mon-compte">Tableau de bord</RouterLink>

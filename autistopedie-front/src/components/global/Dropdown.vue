@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/16/solid';
 import { ref } from 'vue';
 
 defineProps<{
@@ -17,8 +18,8 @@ const toggleIsShow = (): void => {
     <div :class="'dropdown ' + color + (thin ? ' thin' : '')">
         <Button type="button" :class="'button-dropdown ' + (isShow ? 'active': '')" :color="color" @click="toggleIsShow()">
             {{  title }}
-            <chevron-up-icon v-if="isShow"></chevron-up-icon>
-            <chevron-down-icon v-else></chevron-down-icon>
+            <ChevronUpIcon v-if="isShow" />
+            <ChevronDownIcon v-else />
         </Button>
         <div class="dropdown-contents" v-if="isShow">
             <slot></slot>

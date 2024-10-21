@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import { EnvelopeIcon } from '@heroicons/vue/16/solid';
+</script>
+
 <template>
     <section class="classic-container contribute-container">
         <div>
@@ -33,7 +37,7 @@
             <p class="small-text">Un formulaire sera ajouté ici prochainement. Le développement de cette fonctionnalité est en attente, en attendant le lien ci-dessous vous redirigera sur votre adresse mail pour m'envoyer un courriel directement:</p>
             <div class="actions-container">
                 <a href="mailto:kim.robert.dev44@gmail.com" target="_blank" class="button-styled-link secondary">
-                    <email-box-icon></email-box-icon> M'envoyer un e-mail
+                    <EnvelopeIcon /> M'envoyer un e-mail
                 </a>
             </div>
         </div>

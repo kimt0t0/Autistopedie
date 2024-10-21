@@ -5,6 +5,7 @@ import router from '@/router';
 import { useAuthStore } from '@/stores/auth.store';
 import { useModalStore } from '@/stores/modal.store';
 import { passwordValidator, usernameValidator } from '@/validators/auth.validator';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/16/solid';
 import { computed, reactive, ref } from 'vue';
 
 // Form data
@@ -95,8 +96,8 @@ const onClickAccount = ():void => {
                     required
                 />
                 <Button type="button" size="small" color="grey" @click="toggleIsPasswordHidden()">
-                    <eye-icon class="password-button-icon" v-if="isPasswordHidden"></eye-icon>
-                    <eye-off-icon class="password-button-icon" v-else></eye-off-icon>
+                    <EyeIcon class="password-button-icon" v-if="isPasswordHidden" />
+                    <EyeSlashIcon class="password-button-icon" v-else />
                 </Button>
                 <label class="input-label" for="password">password</label>
             </div>

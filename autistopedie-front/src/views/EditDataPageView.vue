@@ -4,6 +4,7 @@ import { Role } from '@/enums/Role.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil } from '@/utils/formatting.util';
+import { BookOpenIcon } from '@heroicons/vue/16/solid';
 import defaultIllustration from '@images/default-illustration.jpg';
 import { onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
@@ -39,7 +40,7 @@ onBeforeMount(async () => {
     <div v-else class="classic-container edit-datapage-container">
         <HeroTitle color="primary">Mode édition</HeroTitle>
         <RouterLink :to="'/page/' + dataId" class="page-link">
-            <glasses-icon></glasses-icon> Voir la page
+            <BookOpenIcon /> Voir la page
         </RouterLink>
         <!-- Illustration -->
         <Dropdown title="Illustration de couverture" color="shadows">

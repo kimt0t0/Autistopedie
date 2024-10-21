@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useAuthStore } from '@/stores/auth.store';
 import { useModalStore } from '@/stores/modal.store';
+import { XMarkIcon } from '@heroicons/vue/16/solid';
 import LoginForm from '../forms/LoginForm.vue';
 import SignupForm from '../forms/SignupForm.vue';
 </script>
@@ -10,7 +11,7 @@ import SignupForm from '../forms/SignupForm.vue';
         <div class="modal">
             <div class="headband">
                 <Button shape="round" @click="useModalStore().toggleIsShow()" color="grey">
-                    <door-closed-cancel-icon></door-closed-cancel-icon>
+                    <XMarkIcon />
                 </Button>
             </div>
             <div class="contents">

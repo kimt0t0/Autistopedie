@@ -15,7 +15,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: $space-xs;
+    gap: $space-s;
     background-color: transparent;
     border: 3px solid $primary;
     border-radius: $radius-xxs;
@@ -28,7 +28,7 @@
     &.active {
         background-color: $primary;
         color: $grey;
-        > .material-design-icon {
+        > svg {
             @include transition();
             transform: rotate(380deg);
         }

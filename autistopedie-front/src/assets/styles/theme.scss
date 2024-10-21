@@ -233,7 +233,8 @@ button {
     width: fit-content;
 }
 
-// Center icon in all components
-.material-design-icon {
-    padding-top: $space-xs;
+svg {
+    font-size: $font-s;
+    height: $font-m;
+    padding-left: $space-xxs;
 }

@@ -6,6 +6,7 @@ import { Role } from '@/enums/Role.enum';
 import type { IDataPage } from '@/interfaces/IDataPage.interface';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatDateUtil, formatImageUrlUtil } from '@/utils/formatting.util';
+import { PencilIcon, TrashIcon, XMarkIcon } from '@heroicons/vue/16/solid';
 import defaultIllustation from '@images/default-illustration.jpg';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 import { onBeforeMount, ref, watch } from 'vue';
@@ -62,7 +63,7 @@ const setIsDeleteAction = (value: boolean): void => {
         <div class="alerts" v-if="isDeleteAction">
             <DeleteDataForm :dataId="dataId" />
             <Button type="button" color="alert" @click="setIsDeleteAction(false)">
-                <close-icon></close-icon> Annuler
+                <XMarkIcon /> Annuler
             </Button>
         </div>
         <div class="datapage-head" :style="{ backgroundImage: `url(${coverIllustrationPath})` }">
@@ -79,10 +80,10 @@ const setIsDeleteAction = (value: boolean): void => {
         <p v-else>Cette page n'a pas encore de contenu.</p>
         <div class="actions-container" v-if="useAuthStore().decodedToken?.role == (Role.ADMIN || Role.CONTRIBUTOR)">
             <RouterLink :to="'/edition/' + dataId" class="button-styled-link secondary">
-                <pencil-icon></pencil-icon> Éditer
+                <PencilIcon /> Éditer
             </RouterLink>
             <Button type="button" color="alert" @click="setIsDeleteAction(true)">
-                <delete-icon></delete-icon> Supprimer
+                <TrashIcon /> Supprimer
             </Button>
         </div>
     </section>

@@ -7,6 +7,7 @@ import { useAuth } from '@/composables/auth.composable';
 import { Role } from '@/enums/Role.enum';
 import type { IUserAccountData } from '@/interfaces/IUserAccountData.interface';
 import { useAuthStore } from '@/stores/auth.store';
+import { BookOpenIcon, PencilIcon, PlusIcon } from '@heroicons/vue/16/solid';
 import { onBeforeMount, ref } from 'vue';
 
 const user = ref<IUserAccountData | undefined>();
@@ -46,8 +47,8 @@ const toggleIsEdit = (): void => {
         <HeroTitle>Bienvenue <span class="success" v-if="user">{{ user?.username }}</span></HeroTitle>
         <Dropdown title="Mes informations" color="success">
             <Button class="toggle-form-button" :color="isEdit ? 'success' : 'secondary'" shape="round" @click="toggleIsEdit()">
-                <glasses-icon v-if="isEdit"></glasses-icon>
-                <pencil-icon v-else></pencil-icon>
+                <BookOpenIcon v-if="isEdit" />
+                <PencilIcon v-else />
             </Button>
             <EditUserForm v-if="isEdit" />
             <div v-else class="contents">
@@ -60,7 +61,7 @@ const toggleIsEdit = (): void => {
         </Dropdown>
         <div class="center-content">
             <RouterLink class="new-page-link" to="/creation">
-                <plus-icon></plus-icon>
+                <PlusIcon />
                 Créer une nouvelle page
             </RouterLink>
         </div>

@@ -1,0 +1,1 @@
+{"version":3,"file":"remove-user.dto.js","sourceRoot":"","sources":["../../../../src/resources/user/dto/remove-user.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAAoE;AAEpE,MAAa,aAAa;CAQzB;AARD,sCAQC;AALG;IAFC,IAAA,yBAAO,GAAE;IACT,IAAA,wBAAM,EAAC,CAAC,EAAE,GAAG,CAAC;;4CACD;AAId;IAFC,IAAA,kCAAgB,GAAE;IAClB,IAAA,wBAAM,EAAC,CAAC,EAAE,GAAG,CAAC;;+CACE"}

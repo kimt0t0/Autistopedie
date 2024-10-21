@@ -14,6 +14,8 @@ import SuccessMessage from './components/global/SuccessMessage.vue';
 
 // Quill as a component
 import { Quill, QuillEditor } from '@vueup/vue-quill';
+// Auto format links
+import MagicUrl from 'quill-magic-url';
 // Formatter for images and videos
 import BlotFormatter from 'quill-blot-formatter';
 // Quill UI themes (test and choose one)
@@ -21,7 +23,6 @@ import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 // Icons from Vue Material Icons
-import MagicUrl from 'quill-magic-url';
 import Account from 'vue-material-design-icons/Account.vue';
 import AccountOff from 'vue-material-design-icons/AccountOff.vue';
 import ChevronDown from 'vue-material-design-icons/ChevronDown.vue';
@@ -39,12 +40,15 @@ import EyeOff from 'vue-material-design-icons/EyeOff.vue';
 import Glasses from 'vue-material-design-icons/Glasses.vue';
 import Pencil from 'vue-material-design-icons/Pencil.vue';
 import Plus from 'vue-material-design-icons/Plus.vue';
+
+// Global components
 import DataForm from './components/forms/DataForm.vue';
 import DeleteDataForm from './components/forms/DeleteDataForm.vue';
 import IllustrationForm from './components/forms/IllustrationForm.vue';
 import Card from './components/global/Card.vue';
 import PageGuard from './components/layout/PageGuard.vue';
 
+// Initialize app
 const app = createApp(App);
 
 app.use(createPinia());

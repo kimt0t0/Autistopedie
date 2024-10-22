@@ -57,7 +57,8 @@ const toggleIsEdit = (): void => {
             </div>
         </Dropdown>
         <Dropdown title="Mes pages" color="success">
-            <Gallery v-if="user?.addedData" :dataPages="user?.addedData" />
+            <Gallery v-if="Array.isArray(user?.addedData)" :dataPages="user?.addedData" />
+            <Card v-else-if="user?.addedData" :datapage="user?.addedData" />
             <p v-else>Vous n'avez pas encore ajouté de nouvelle page.</p>
         </Dropdown>
         <div class="center-content">

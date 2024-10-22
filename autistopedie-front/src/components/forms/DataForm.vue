@@ -25,7 +25,6 @@ const quillRef = ref<InstanceType<typeof QuillEditor> | null>(null);
 const editorOptions: object = {
     modules: {
         magicUrl: true,
-        blotFormatter: {}
     },
     placeholder: "Ajoutez vos contenus ici"
 };

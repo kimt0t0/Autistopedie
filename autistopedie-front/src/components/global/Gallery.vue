@@ -8,8 +8,7 @@ defineProps<{
 
 <template>
     <div class="horizontal-display gallery-container">
-        <Card v-if="dataPages?.length > 1" v-for="(page, index) in dataPages" :key="index" :datapage="page" />
-        <Card v-else :datapage="dataPages" />
+        <Card v-for="(page, index) in dataPages" :key="index" :datapage="page" />
     </div>
 </template>
 

@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import Gallery from '@/components/global/Gallery.vue';
 import SearchBox from '@/components/global/SearchBox.vue';
-import { useDataPage } from '@/composables/datapage.composable';
-import type { IDataPage } from '@/interfaces/IDataPage.interface';
+import { useDataPagesStore } from '@/stores/datapages.store';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/16/solid';
 import { onBeforeMount, ref } from 'vue';
 
-const selectedPages = ref<IDataPage[]|void|undefined>();
-const allDataPages = ref<IDataPage[]|void|undefined>();
-
 onBeforeMount(async() => {
     try {
-        allDataPages.value = await useDataPage().getAll();
-        if(!allDataPages) setIsError(true);
-        selectedPages.value = allDataPages.value;
+        useDataPagesStore().getAll();
+        if(!useDataPagesStore().allDataPages) setIsError(true);
     } catch (e) {
         console.error(`Data pages could not be loaded correctly`);
     }
@@ -39,7 +34,7 @@ const setIsError = (value: boolean):void => {
             <ChevronDownIcon v-else />
         </Button>
         <SearchBox v-if="isShowSearchBox" />
-        <Gallery :dataPages="selectedPages" />
+        <Gallery :dataPages="useDataPagesStore().selectedDataPages" />
     </div>
 </template>
 

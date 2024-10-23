@@ -6,6 +6,7 @@ defineProps<{
     title: string
     color?: string
     thin?: boolean
+    small?: boolean
 }>();
 
 const isShow = ref<boolean>(false);
@@ -15,7 +16,7 @@ const toggleIsShow = (): void => {
 </script>
 
 <template>
-    <div :class="'dropdown ' + color + (thin ? ' thin' : '')">
+    <div :class="'dropdown ' + color + (thin ? ' thin' : '') + (small ? ' small' : '')">
         <Button type="button" :class="'button-dropdown ' + (isShow ? 'active': '')" :color="color" @click="toggleIsShow()">
             {{  title }}
             <ChevronUpIcon v-if="isShow" />
@@ -54,8 +55,17 @@ const toggleIsShow = (): void => {
         border-color: $alert;
     }
     &.thin {
-        border: 1px solid transparent;
+        border-width: 1px;
+        > button {
+            border-width: 2px;
+        }
     }
+    &.small {
+        > button {
+            font-size: 16px;
+            font-weight: 600;
+        }
+    } 
 }
 
 .button-dropdown {

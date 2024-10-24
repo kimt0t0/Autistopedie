@@ -142,6 +142,10 @@ p {
     border-color: $grey;
     max-width: fit-content;
     text-transform: capitalize;
+    @media (max-width: $bp-xs) {
+        max-width: initial;
+        width: 100%;
+    }
     &:hover {
         background-color: $grey;
         color: $light;
@@ -193,11 +197,19 @@ p {
 
 .text-input {
     min-width: 160px;
+    @media (max-width: $bp-m) {
+        min-width: initial;
+        width: 100%;
+    }
 }
 
 .contents-text-input {
     width: 420px;
     min-height: 80px;
+    @media (max-width: $bp-m) {
+        min-width: initial;
+        width: 100%;
+    }
 }
 
 .submit-container {

@@ -3,7 +3,11 @@ import Gallery from '@/components/global/Gallery.vue';
 import SearchBox from '@/components/global/SearchBox.vue';
 import { useDataPagesStore } from '@/stores/datapages.store';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/16/solid';
-import { onBeforeMount, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
+
+const isLoading = computed((): boolean => {
+    return useDataPagesStore().allDataPages ? false : true
+});
 
 onBeforeMount(async() => {
     try {
@@ -34,7 +38,8 @@ const setIsError = (value: boolean):void => {
             <ChevronDownIcon v-else />
         </Button>
         <SearchBox v-if="isShowSearchBox" />
-        <Gallery :dataPages="useDataPagesStore().selectedDataPages" />
+        <Loader v-if="isLoading" />
+        <Gallery v-else :dataPages="useDataPagesStore().selectedDataPages" />
     </div>
 </template>
 

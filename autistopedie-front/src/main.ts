@@ -27,6 +27,7 @@ import DataForm from './components/forms/DataForm.vue';
 import DeleteDataForm from './components/forms/DeleteDataForm.vue';
 import IllustrationForm from './components/forms/IllustrationForm.vue';
 import Card from './components/global/Card.vue';
+import Loader from './components/layout/Loader.vue';
 import PageGuard from './components/layout/PageGuard.vue';
 
 // Initialize app
@@ -39,12 +40,13 @@ app.use(router);
 app.component('Button', Button)
     .component('Card', Card)
     .component('DataForm', DataForm)
+    .component('DeleteDataForm', DeleteDataForm)
     .component('Dropdown', Dropdown)
     .component('ErrorMessage', ErrorMessage)
-    .component('HeroTitle', HeroTitle)
-    .component('DeleteDataForm', DeleteDataForm)
-    .component('IllustrationForm', IllustrationForm)
     .component('Gallery', Gallery)
+    .component('HeroTitle', HeroTitle)
+    .component('IllustrationForm', IllustrationForm)
+    .component('Loader', Loader)
     .component('PageGuard', PageGuard)
     .component('SuccessMessage', SuccessMessage);
 

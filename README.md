@@ -15,11 +15,14 @@ Le code du site est sous licence open-source GNU-LGPL.
 
 - [Illustration par défaut des cartes par Polina Kovaleva](https://www.pexels.com/fr-fr/photo/mots-manuscrits-sur-une-surface-bleue-8709181/)
 
+## Sources de code
+
+- [DevTo 100 CSS loaders by Temani Afif](https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje)
+
 ## For the dev
 <details>
 <summary>To-do Front-end</summary>
 
-- Add contents to Definition page
 - Add filters
 - Add automated tests
 </details>

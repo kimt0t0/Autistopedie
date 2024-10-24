@@ -19,14 +19,22 @@ export const filterByCategoriesUtil = (datapages: IDataPage[]|void|undefined, ca
 
 export const filterByTitleUtil = (datapages: IDataPage[]|void|undefined, title: string): IDataPage[]|void => {
     try {
-        console.log(`Filtering by title from util with search ${title}`);
         if (!datapages) throw new Error('Datapages array is empty, cannot filter an empty array.');
         if (!title || title.length < 1) throw new Error('No title to filter by title.');
         return datapages.filter(datapage => {
-            console.log(`Filtering datapage ${datapage.title}`);
-            let result = datapage.title.match(new RegExp(title, "i"));
-            console.log(`Result: ${result}`)
-            return result ? true : false; 
+            return datapage.title.match(new RegExp(title, "i")) ? true : false; 
+        })
+    } catch (e) {
+        console.error(`Could not filter datapages by title due to error: ${e}`);
+    }
+}
+
+export const filterByContentsUtil = (datapages: IDataPage[]|void|undefined, contents: string): IDataPage[]|void => {
+    try {
+        if (!datapages) throw new Error('Datapages array is empty, cannot filter an empty array.');
+        if (!contents || contents.length < 1) throw new Error('No contents to filter by contents.');
+        return datapages.filter(datapage => {
+            return (datapage.contents && datapage.contents.toString().match(new RegExp(contents, "i"))) ? true: false;
         })
     } catch (e) {
         console.error(`Could not filter datapages by title due to error: ${e}`);

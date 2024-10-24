@@ -38,6 +38,17 @@ const checkCreatedFilters = (): void => {
 const onFilterSelectedData = () => {
     useDataPagesStore().filterSelectedData(selectedFilters);
 };
+
+const onReset = () => {
+    selectedFilters.alphaAZ = false;
+    selectedFilters.alphaZA = false;
+    selectedFilters.categories = [];
+    selectedFilters.contents = '';
+    selectedFilters.createdAsc = false;
+    selectedFilters.createdDesc = false;
+    selectedFilters.title = '';
+    useDataPagesStore().resetSelectedDataPages();
+}
 </script>
 
 <template>
@@ -97,8 +108,9 @@ const onFilterSelectedData = () => {
                     </div>
                 </div>
             </Dropdown>
-        <div class="submit-container">
+        <div class="actions-container">
             <Button color="success">Filtrer</Button>
+            <Button type="button" color="grey" @click="onReset">Réinitialiser</Button>
         </div>
     </form>
 </template>
@@ -211,9 +223,12 @@ p {
     }
 }
 
-.submit-container {
+.actions-container {
     box-sizing: border-box;
     margin: -$space-m;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-m;
     @include classicPadding();
 }
 </style>

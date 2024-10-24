@@ -63,11 +63,11 @@ const onFilterSelectedData = () => {
             <div class="filter-container">
                 <h3>Par date de création:</h3>
                 <div :class="'button-styled-checkbox' + (selectedFilters.createdAsc ? ' active' : '')" @click="checkCreatedFilters()">
-                    <input type="checkbox" id="createdAsc" :value="selectedFilters.createdAsc" v-model="selectedFilters.alphaAZ" />
+                    <input type="checkbox" id="createdAsc" :value="selectedFilters.createdAsc" v-model="selectedFilters.createdAsc" />
                     <label><ArrowUpRightIcon />Du plus ancien...</label>
                 </div>
                 <div :class="'button-styled-checkbox' + (selectedFilters.createdDesc ? ' active' : '')" @click="checkCreatedFilters()">
-                    <input type="checkbox" id="createdDesc" :value="selectedFilters.createdDesc" v-model="selectedFilters.alphaZA" />
+                    <input type="checkbox" id="createdDesc" :value="selectedFilters.createdDesc" v-model="selectedFilters.createdDesc" />
                     <label><ArrowDownRightIcon />Du plus récent...</label>
                 </div>
             </div>

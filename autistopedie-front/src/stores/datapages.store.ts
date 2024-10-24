@@ -1,6 +1,7 @@
 import { useDataPage } from "@/composables/datapage.composable";
 import type { IDataPage } from "@/interfaces/IDataPage.interface";
 import type { IFilter } from "@/interfaces/IFilter.interface";
+import { filterByCategoriesUtil } from "@/utils/filter.util";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -18,7 +19,21 @@ export const useDataPagesStore = defineStore('datapages', () => {
     }
 
     const filterSelectedData = (filters: IFilter): void => {
-        
+        let filtered = allDataPages.value;
+        console.log(`Filtered variable value at start from store: ${filtered}`);
+        if (filters.title && filters.title.length > 0) {
+            // filter by title
+        }
+        if (filters.contents && filters.contents.length > 0) {
+            // filter by contents
+        }
+        if (filters.categories) {
+            filtered = filterByCategoriesUtil(filtered, filters.categories);
+        console.log(`Filtered variable value at end of categories filter in store: ${filtered}`);
+        }
+        // todo: sorting alphabetically and/or by date
+        console.log(`Filtered variable value at end of store: ${filtered}`);
+        selectedDataPages.value = filtered;
     }
     
     const resetAllDataPages = (): void => {

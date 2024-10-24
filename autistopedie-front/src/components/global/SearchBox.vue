@@ -36,7 +36,6 @@ const checkCreatedFilters = (): void => {
 
 // Filter data on form submission
 const onFilterSelectedData = () => {
-    alert("Les filtres ne sont pas encore effectifs, la fonctionnalité est en cours de développement :-) Merci pour votre compréhension !")
     useDataPagesStore().filterSelectedData(selectedFilters);
 };
 </script>

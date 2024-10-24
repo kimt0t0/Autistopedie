@@ -3,11 +3,17 @@ import Gallery from '@/components/global/Gallery.vue';
 import SearchBox from '@/components/global/SearchBox.vue';
 import { useDataPagesStore } from '@/stores/datapages.store';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/16/solid';
+import { storeToRefs } from 'pinia';
 import { computed, onBeforeMount, ref } from 'vue';
 
+// page loader
 const isLoading = computed((): boolean => {
     return useDataPagesStore().allDataPages ? false : true
 });
+
+// watch changes in selected datapages in pinia store
+const datapagesStore = useDataPagesStore();
+const { selectedDataPages } = storeToRefs(datapagesStore);
 
 onBeforeMount(async() => {
     try {
@@ -27,6 +33,7 @@ const isError = ref<boolean>(false);
 const setIsError = (value: boolean):void => {
     isError.value = value;
 }
+
 </script>
 
 <template>
@@ -39,7 +46,7 @@ const setIsError = (value: boolean):void => {
         </Button>
         <SearchBox v-if="isShowSearchBox" />
         <Loader v-if="isLoading" />
-        <Gallery v-else :dataPages="useDataPagesStore().selectedDataPages" />
+        <Gallery v-else :dataPages="selectedDataPages" />
     </div>
 </template>
 
